@@ -1,0 +1,12 @@
+# Eclipse
+.classpath
+.project
+.settings
+ 
+# Maven
+log/
+target/
+
+# Sonar
+.scannerwork/
+sonar-project.properties
