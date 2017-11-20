@@ -9,6 +9,7 @@ import javax.swing.JMenuItem;
 
 import es.vsanchez.clinicaveterinaria.vista.paneles.PanelNuevaMascota;
 import es.vsanchez.clinicaveterinaria.vista.paneles.PanelRegistroCliente;
+import es.vsanchez.clinicaveterinaria.vista.paneles.PanelTratamiento;
 
 public class MenuBarPrincipal extends JMenuBar {
 
@@ -30,14 +31,11 @@ public class MenuBarPrincipal extends JMenuBar {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Evento: " + e.getSource());
 				if (e.getSource().equals(registro)) {
-					System.out.println("Hemos pulsado en registro");
 					ventanaPrincipalJFrame.setPanelPrincipal(new PanelRegistroCliente());
 				} else if (e.getSource().equals(nuevaMascota)) {
-					System.out.println("Hemos pulsado en nuevaMascota");
 					ventanaPrincipalJFrame.setPanelPrincipal(new PanelNuevaMascota());
 				} else if (e.getSource().equals(tratamiento)) {
-					System.out.println("Hemos pulsado en tratamiento");
-					// ventanaPrincipalJFrame.setPanelPrincipal(new PanelBienvenida());
+					ventanaPrincipalJFrame.setPanelPrincipal(new PanelTratamiento());
 				}
 			}
 		};

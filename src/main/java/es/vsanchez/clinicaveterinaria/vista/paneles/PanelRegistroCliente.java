@@ -20,6 +20,11 @@ public class PanelRegistroCliente extends JPanel {
 		//setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		
 		setLayout(new BorderLayout());
+		
+		JPanel panelMargenSuperior = new JPanel();
+		panelMargenSuperior.setPreferredSize(new Dimension(getWidth(), 20));
+		add(panelMargenSuperior, BorderLayout.NORTH);
+		
 		JPanel panelMargenIzquierdo = new JPanel();
 		panelMargenIzquierdo.setPreferredSize(new Dimension(100, getHeight()));
 		add(panelMargenIzquierdo, BorderLayout.WEST);
@@ -32,7 +37,7 @@ public class PanelRegistroCliente extends JPanel {
 		add(panelMargenDerecho, BorderLayout.EAST);
 		
 		JPanel panelMargenInferior = new JPanel();
-		panelMargenInferior.setPreferredSize(new Dimension(getWidth(), 100));
+		panelMargenInferior.setPreferredSize(new Dimension(getWidth(), 90));
 		add(panelMargenInferior, BorderLayout.SOUTH);
 	}
 	
@@ -49,7 +54,7 @@ public class PanelRegistroCliente extends JPanel {
 		
 		/* Fila 2 */
 		JTextField campoNombreCliente = new JTextField("Nombre Cliente");
-		campoNombreCliente.setPreferredSize(new Dimension(50, 20));
+		campoNombreCliente.setPreferredSize(new Dimension(50, 20));             // NO SE SI HACE ALGO ESTO
 		panelCentral.add(campoNombreCliente);
 		JTextField campoDNICliente = new JTextField("DNI Cliente");
 		panelCentral.add(campoDNICliente);

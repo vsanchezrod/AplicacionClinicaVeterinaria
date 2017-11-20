@@ -23,6 +23,7 @@ public class VentanaPrincipalJFrame extends JFrame {
 		// MenuBarPrincipal menuPrincipal = new MenuBarPrincipal(); ==>
 		// setJMenuBar(menuPrincipal);
 		setJMenuBar(new MenuBarPrincipal(this));
+		//panelPrincipal = new PanelBienvenida();
 		panelPrincipal = new PanelBienvenida();
 		add(panelPrincipal, BorderLayout.CENTER);
 
@@ -54,7 +55,9 @@ public class VentanaPrincipalJFrame extends JFrame {
 
 		// Vamos a crear configurar el tamaño del FRAME para que ocupe la mitad del
 		// tamañó de la pantalla en anchura y altura
-		setSize(anchoPantalla / 4, alturaPantalla / 2);
+		
+		setSize(1200,800);
+		//setSize(anchoPantalla/2, alturaPantalla/2);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
