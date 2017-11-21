@@ -26,7 +26,6 @@ public class VentanaPrincipalJFrame extends JFrame {
 		//panelPrincipal = new PanelBienvenida();
 		panelPrincipal = new PanelBienvenida();
 		add(panelPrincipal, BorderLayout.CENTER);
-
 		setVisible(true);
 
 	}
@@ -50,17 +49,21 @@ public class VentanaPrincipalJFrame extends JFrame {
 
 		// Esta clase Dimension tiene dos atributos de clase height y width, y vamos a
 		// guardar su valor en dos variables nuevas
-		int alturaPantalla = tamanoPantalla.height;
-		int anchoPantalla = tamanoPantalla.width;
+		//int alturaPantalla = tamanoPantalla.height;
+		//int anchoPantalla = tamanoPantalla.width;
 
 		// Vamos a crear configurar el tamaño del FRAME para que ocupe la mitad del
 		// tamañó de la pantalla en anchura y altura
 		
 		setSize(1200,800);
+		//setResizable(false);
 		//setSize(anchoPantalla/2, alturaPantalla/2);
 		setLocationRelativeTo(null);
+		setMinimumSize(new Dimension(1200,800));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
+		//setIconImage(new ImageIcon(getClass().getResource("vetilernaproject/src/main/resources/perro.png")).getImage());
+		
 	}
 
 }

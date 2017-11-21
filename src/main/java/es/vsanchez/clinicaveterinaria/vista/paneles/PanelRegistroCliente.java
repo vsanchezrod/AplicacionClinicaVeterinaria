@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -16,8 +17,6 @@ public class PanelRegistroCliente extends JPanel {
 
 
 	public PanelRegistroCliente() {
-		
-		//setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		
 		setLayout(new BorderLayout());
 		
@@ -54,7 +53,6 @@ public class PanelRegistroCliente extends JPanel {
 		
 		/* Fila 2 */
 		JTextField campoNombreCliente = new JTextField("Nombre Cliente");
-		campoNombreCliente.setPreferredSize(new Dimension(50, 20));             // NO SE SI HACE ALGO ESTO
 		panelCentral.add(campoNombreCliente);
 		JTextField campoDNICliente = new JTextField("DNI Cliente");
 		panelCentral.add(campoDNICliente);
@@ -131,6 +129,22 @@ public class PanelRegistroCliente extends JPanel {
 		panelCentral.add(new JPanel());
 		panelCentral.add(new JPanel());
 
+		
+		// Agrupación de botones en grupo para evitar selección múltiple
+		ButtonGroup grupoTipoMascota = new ButtonGroup();
+		grupoTipoMascota.add(radioButtonGato);
+		grupoTipoMascota.add(radioButtonPerro);
+		grupoTipoMascota.add(radioButtonRoedor);
+		
+		ButtonGroup grupoTipoRoedor = new ButtonGroup();
+		grupoTipoRoedor.add(radioButtonConejo);
+		grupoTipoRoedor.add(radioButtonRaton);
+				
+		ButtonGroup grupoGenero = new ButtonGroup();
+		grupoGenero.add(radioButtonMacho);
+		grupoGenero.add(radioButtonHembra);
+	
+		
 		return panelCentral;
 	}
 }

@@ -17,6 +17,7 @@ public class MenuBarPrincipal extends JMenuBar {
 	private JMenuItem registro, nuevaMascota, tratamiento;
 	private VentanaPrincipalJFrame ventanaPrincipalJFrame;
 	
+	// Constructor de la clase MenuBarPrincipal
 	public MenuBarPrincipal(VentanaPrincipalJFrame ventanaPrincipal) {
 
 		this.ventanaPrincipalJFrame = ventanaPrincipal;
@@ -24,12 +25,14 @@ public class MenuBarPrincipal extends JMenuBar {
 		add(menuOpciones);
 	}
 
+	// Método de clase que crea los elementos del menu así como el evento de cambiar de panel
 	private JMenu crearMenuOpciones() {
 
+		// Evento para cambiar el panel que se muestra a través del menu
 		ActionListener menuActionListener = new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Evento: " + e.getSource());
+				
 				if (e.getSource().equals(registro)) {
 					ventanaPrincipalJFrame.setPanelPrincipal(new PanelRegistroCliente());
 				} else if (e.getSource().equals(nuevaMascota)) {

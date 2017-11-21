@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -28,8 +29,7 @@ public class PanelNuevaMascota extends JPanel {
 
 		JPanel panelContenidoCentral = construirPanelCentral();
 		add(panelContenidoCentral, BorderLayout.CENTER);
-		// panelContenidoCentral.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
+		
 		JPanel panelMargenDerecho = new JPanel();
 		panelMargenDerecho.setPreferredSize(new Dimension(50, getHeight()));
 		add(panelMargenDerecho, BorderLayout.EAST);
@@ -122,7 +122,21 @@ public class PanelNuevaMascota extends JPanel {
 		panelCentral.add(buttonInsertar);
 		panelCentral.add(new JPanel());
 		panelCentral.add(new JPanel());
-
+		
+		// Agrupación de botones en grupo para evitar selección múltiple
+		ButtonGroup grupoTipoMascota = new ButtonGroup();
+		grupoTipoMascota.add(radioButtonGato);
+		grupoTipoMascota.add(radioButtonPerro);
+		grupoTipoMascota.add(radioButtonRoedor);
+		
+		ButtonGroup grupoTipoRoedor = new ButtonGroup();
+		grupoTipoRoedor.add(radioButtonConejo);
+		grupoTipoRoedor.add(radioButtonRaton);
+				
+		ButtonGroup grupoGenero = new ButtonGroup();
+		grupoGenero.add(radioButtonMacho);
+		grupoGenero.add(radioButtonHembra);
+		
 		return panelCentral;
 
 	}
