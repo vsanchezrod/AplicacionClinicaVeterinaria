@@ -11,9 +11,12 @@ public class PanelBienvenida extends JPanel {
 
 	public PanelBienvenida() {
 
+		// Se le asigna un layout de tipo BorderLayout
 		setLayout(new BorderLayout());
+		
 		JLabel etiquetaBienvenida = new JLabel("Bienvenido a la Clínica VetIlerna");
 		etiquetaBienvenida.setHorizontalAlignment(JLabel.CENTER);
+		
 		add(etiquetaBienvenida, BorderLayout.CENTER);
 	}
 }

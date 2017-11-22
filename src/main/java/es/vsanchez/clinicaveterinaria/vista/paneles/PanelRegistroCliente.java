@@ -18,6 +18,7 @@ public class PanelRegistroCliente extends JPanel {
 
 	public PanelRegistroCliente() {
 		
+		// Layout BORDERLAYAOUT
 		setLayout(new BorderLayout());
 		
 		JPanel panelMargenSuperior = new JPanel();
@@ -42,6 +43,7 @@ public class PanelRegistroCliente extends JPanel {
 	
 	private JPanel construirPanelCentral() {
 	
+		// Se instancia un JPanel con un layout de tipo GRIDLAYOUT
 		JPanel panelCentral = new JPanel();
 		panelCentral.setLayout(new GridLayout(12, 3, 100, 20));		
 		
@@ -144,7 +146,6 @@ public class PanelRegistroCliente extends JPanel {
 		grupoGenero.add(radioButtonMacho);
 		grupoGenero.add(radioButtonHembra);
 	
-		
 		return panelCentral;
 	}
 }

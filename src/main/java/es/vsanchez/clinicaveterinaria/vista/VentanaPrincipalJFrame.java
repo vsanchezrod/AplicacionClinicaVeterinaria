@@ -1,8 +1,6 @@
 package es.vsanchez.clinicaveterinaria.vista;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -20,16 +18,14 @@ public class VentanaPrincipalJFrame extends JFrame {
 
 		configurarVentana();
 
-		// MenuBarPrincipal menuPrincipal = new MenuBarPrincipal(); ==>
-		// setJMenuBar(menuPrincipal);
+		// MenuBarPrincipal menuPrincipal = new MenuBarPrincipal(); ==> setJMenuBar(menuPrincipal);
 		setJMenuBar(new MenuBarPrincipal(this));
-		//panelPrincipal = new PanelBienvenida();
 		panelPrincipal = new PanelBienvenida();
 		add(panelPrincipal, BorderLayout.CENTER);
 		setVisible(true);
-
 	}
 
+	// Método que setea el panel que se va a mostrar en el JFrame
 	public void setPanelPrincipal(JPanel panel) {
 
 		remove(panelPrincipal);
@@ -38,32 +34,13 @@ public class VentanaPrincipalJFrame extends JFrame {
 		panelPrincipal.updateUI();
 	}
 
+	// Configura el JFrame
 	private void configurarVentana() {
 
-		// Se tiene que detectar la resolucion de pantalla
-		Toolkit pantallaDispositivo = Toolkit.getDefaultToolkit();
-
-		// Se almacena en un objeto de tipo dimension el tamaño de la pantalla
-		Dimension tamanoPantalla = pantallaDispositivo.getScreenSize();
-		System.out.println(tamanoPantalla);
-
-		// Esta clase Dimension tiene dos atributos de clase height y width, y vamos a
-		// guardar su valor en dos variables nuevas
-		//int alturaPantalla = tamanoPantalla.height;
-		//int anchoPantalla = tamanoPantalla.width;
-
-		// Vamos a crear configurar el tamaño del FRAME para que ocupe la mitad del
-		// tamañó de la pantalla en anchura y altura
-		
-		setSize(1200,800);
-		//setResizable(false);
-		//setSize(anchoPantalla/2, alturaPantalla/2);
+		setSize(1200, 800);
+		setResizable(false);
 		setLocationRelativeTo(null);
-		setMinimumSize(new Dimension(1200,800));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
-		//setIconImage(new ImageIcon(getClass().getResource("vetilernaproject/src/main/resources/perro.png")).getImage());
-		
 	}
-
 }
