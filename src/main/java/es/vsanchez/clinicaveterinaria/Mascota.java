@@ -1,17 +1,22 @@
 package es.vsanchez.clinicaveterinaria;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Mascota {
 
 	// Se declaran los atributos de clase encapsulados con private
 	private String nombre;
 	private String codigo;
 	private String genero;
+	private Map<String, String> mapTratamiento;
 	
 	// Constructor vacío
 	public Mascota() {
 		this.nombre = "";
 		this.codigo = "";
 		this.genero = "";
+		mapTratamiento = new HashMap<String, String>();
 	}
 	
 	// Constructor con paso de parámetros
@@ -19,6 +24,7 @@ public class Mascota {
 		this.nombre = nombre;
 		this.codigo = codigo;
 		this.genero = genero;
+		mapTratamiento = new HashMap<String, String>();
 	}
 	
 	// Métodos Setters
@@ -51,5 +57,10 @@ public class Mascota {
 	@Override
 	public String toString() {
 		return this.nombre + " con el código " + this.codigo + " es " + this.genero;
+	}
+	
+	// Método que añade tratamientos al HashMap
+	private void addTratamiento(String fecha, String tratamiento) {
+		mapTratamiento.put(fecha, tratamiento);
 	}
 }
