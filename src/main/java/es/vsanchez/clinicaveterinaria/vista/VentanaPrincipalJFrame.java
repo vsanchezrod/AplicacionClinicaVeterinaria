@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import es.vsanchez.clinicaveterinaria.Cliente;
@@ -53,10 +54,26 @@ public class VentanaPrincipalJFrame extends JFrame {
 	// Método para añadir un cliente nuevo al ArrayList de clientes
 	public void addCliente(Cliente cliente) {
 		listaClientes.add(cliente);
+	}
+	
+	public void listarClientes() {
 		for (Cliente c: listaClientes) {
 			System.out.println(c);
 		}
-		
+	}
+	
+	public Cliente buscarCliente(String dni) {
+		System.out.println("Buscando cliente");			
+		for(int i = 0; i < listaClientes.size(); i++) {
+			Cliente cliente = listaClientes.get(i);
+			if (dni == cliente.getDni()) {
+				System.out.println("Se ha encontrado el cliente con DNI: " + cliente.getDni());
+				return cliente;
+			}
+					
+		}
+		System.out.println("No ha encontrado el cliente");
+		return null;
 	}
 	
 }

@@ -23,6 +23,7 @@ public class PanelNuevaMascota extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private VentanaPrincipalJFrame ventanaPrincipalJFrame;
+	private Cliente clienteBuscado;
 	
 	public PanelNuevaMascota(VentanaPrincipalJFrame ventanaPrincipal) {
 
@@ -70,7 +71,9 @@ public class PanelNuevaMascota extends JPanel {
 		panelCentral.add(new JPanel());
 
 		/* Fila 3 */
-		panelCentral.add(new JPanel());
+		// Creo etiqueta nueva para mostrar el cliente encontrado
+		final JLabel etiquetaNombreCliente = new JLabel();
+		panelCentral.add(etiquetaNombreCliente);
 		panelCentral.add(new JPanel());
 		panelCentral.add(new JPanel());
 
@@ -153,17 +156,8 @@ public class PanelNuevaMascota extends JPanel {
 		buttonBuscar.addActionListener(new ActionListener(){
 			public void actionPerformed (ActionEvent e){
 			
-				// REVISAR ALGO FALLA
-				
-				/*for(int i = 0; i < listaClientes.size(); i++) {
-					
-					Cliente cliente = listaClientes.get(i);
-					
-					if (campoDNICliente.getText() = cliente.getDni()) {
-						
-						System.out.println("Se ha encontrado el cliente con DNI: " + cliente.getDni());
-					}
-				}*/							
+				Cliente clienteBuscado = ventanaPrincipalJFrame.buscarCliente(campoDNICliente.getText());
+				verificarSiClienteEsNulo(etiquetaNombreCliente);	
 			}
 		});
 		
@@ -172,8 +166,6 @@ public class PanelNuevaMascota extends JPanel {
 											
 				// SI EL USUARIO NO EXISTE:
 				System.out.println("No existe cliente con DNI: " + campoDNICliente.getText());
-				
-				
 				
 				
 				// SI EL USUARIO EXISTE: ===> CREAR MASCOTA Y AÑADIRLA AL CLIENTE
@@ -191,12 +183,12 @@ public class PanelNuevaMascota extends JPanel {
 				if (radioButtonGato.isSelected()) {
 					final Gato gatoNuevo = new Gato (campoNombreMascota.getText(), "1", genero, campoColor.getText());
 					
-					// AQUI HAY QUE PONER EL NOMBRE DEL OBJETO CLIENTE clienteNuevo.addMascota(gatoNuevo);
+					clienteBuscado.addMascota(gatoNuevo);
 				}
 				
 				if (radioButtonPerro.isSelected()) {
 					final Perro perroNuevo = new Perro (campoNombreMascota.getText(), "2", genero, campoRaza.getText());
-					// AQUI HAY QUE PONER EL NOMBRE DEL OBJETO CLIENTE clienteNuevo.addMascota(perroNuevo);
+					clienteBuscado.addMascota(perroNuevo);
 				}
 				
 				if (radioButtonRoedor.isSelected()) {
@@ -210,7 +202,7 @@ public class PanelNuevaMascota extends JPanel {
 					}					
 					
 					final Roedor roedorNuevo = new Roedor (campoNombreMascota.getText(), "3", genero, tipo);
-					// AQUI HAY QUE PONER EL NOMBRE DEL OBJETO CLIENTE clienteNuevo.addMascota(roedorNuevo);
+					clienteBuscado.addMascota(roedorNuevo);
 				}
 				
 			}
@@ -222,21 +214,18 @@ public class PanelNuevaMascota extends JPanel {
 				if (e.getSource().equals(radioButtonGato)) {
 					campoColor.setEnabled(true);
 					campoRaza.setEnabled(false);
-					//etiquetaEspecializacionRoedor.setEnabled(false);           EN ESTE PANEL NO EXISTE ESTA ETIQUETA
 					radioButtonRaton.setEnabled(false);
 					radioButtonConejo.setEnabled(false);
 				}
 				if (e.getSource().equals(radioButtonPerro)){
 					campoColor.setEnabled(false);
 					campoRaza.setEnabled(true);
-					//etiquetaEspecializacionRoedor.setEnabled(false);           EN ESTE PANEL NO EXISTE ESTA ETIQUETA
 					radioButtonRaton.setEnabled(false);
 					radioButtonConejo.setEnabled(false);
 				}
 				if (e.getSource().equals(radioButtonRoedor)) {
 					campoColor.setEnabled(false);
 					campoRaza.setEnabled(false);
-					//etiquetaEspecializacionRoedor.setEnabled(true);            EN ESTE PANEL NO EXISTE ESTA ETIQUETA
 					radioButtonRaton.setEnabled(true);
 					radioButtonConejo.setEnabled(true);
 				}
@@ -251,6 +240,15 @@ public class PanelNuevaMascota extends JPanel {
 		
 		return panelCentral;
 
+	}
+	
+	private void verificarSiClienteEsNulo(JLabel etiqueta){
+		if (clienteBuscado == null) {
+			etiqueta.setText("No se ha encontrado cliente!");
+		}
+		else {
+			etiqueta.setText(clienteBuscado.getNombre());
+		}
 	}
 
 }
