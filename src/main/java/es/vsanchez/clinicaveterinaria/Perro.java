@@ -28,7 +28,7 @@ public class Perro extends Mascota{
 	// Método TOSTRING - Sobrescribe al método toString de la clase padre y a su vez de la clase Object 
 	@Override
 	public String toString() {
-		return getNombre() + " es un perro de raza " + this.raza;
+		return getNombre() + " es un perro de raza " + this.raza + " de género " + getGenero();
 	}
 	
 }

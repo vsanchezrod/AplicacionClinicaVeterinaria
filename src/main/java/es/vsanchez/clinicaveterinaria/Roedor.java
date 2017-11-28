@@ -29,7 +29,7 @@ public class Roedor extends Mascota{
 	// Método TOSTRING - Sobrescribe al método toString de la clase padre y a su vez de la clase Object 
 	@Override
 	public String toString() {
-		return getNombre() + " es un " + this.tipo;
+		return getNombre() + " es un " + this.tipo + " de género " + getGenero();
 	}
 	
 }

@@ -60,7 +60,7 @@ public class Mascota {
 	}
 	
 	// Método que añade tratamientos al HashMap
-	private void addTratamiento(String fecha, String tratamiento) {
+	public void addTratamiento(String fecha, String tratamiento) {
 		mapTratamiento.put(fecha, tratamiento);
 	}
 }

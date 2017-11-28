@@ -29,6 +29,6 @@ public class Gato extends Mascota {
 	// Método TOSTRING - Sobrescribe al método toString de la clase padre y a su vez de la clase Object 
 	@Override
 	public String toString() {
-		return getNombre() + " es un gato de color " + this.color;
+		return getNombre() + " es un gato de color " + this.color + " de género " + getGenero();
 	}
 }

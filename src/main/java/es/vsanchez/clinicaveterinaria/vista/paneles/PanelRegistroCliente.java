@@ -5,18 +5,18 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.LineNumberInputStream;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import es.vsanchez.clinicaveterinaria.Cliente;
-import es.vsanchez.clinicaveterinaria.Mascota;
+import es.vsanchez.clinicaveterinaria.Gato;
+import es.vsanchez.clinicaveterinaria.Perro;
+import es.vsanchez.clinicaveterinaria.Roedor;
 
 public class PanelRegistroCliente extends JPanel {
 
@@ -51,11 +51,11 @@ public class PanelRegistroCliente extends JPanel {
 	private JPanel construirPanelCentral() {
 	
 		// Se instancia un JPanel con un layout de tipo GRIDLAYOUT
-		JPanel panelCentral = new JPanel();
+		final JPanel panelCentral = new JPanel();
 		panelCentral.setLayout(new GridLayout(12, 3, 100, 20));		
 		
 		/* Fila 1 */
-		JLabel etiquetaRegistroCliente = new JLabel("Registro Cliente");
+		final JLabel etiquetaRegistroCliente = new JLabel("Registro Cliente");
 		panelCentral.add(etiquetaRegistroCliente);
 		panelCentral.add(new JPanel());
 		panelCentral.add(new JPanel());
@@ -68,13 +68,13 @@ public class PanelRegistroCliente extends JPanel {
 		panelCentral.add(new JPanel());
 
 		/* Fila 3 */
-		JTextField campoDireccionCliente = new JTextField("Dirección Cliente");
+		final JTextField campoDireccionCliente = new JTextField("Dirección Cliente");
 		panelCentral.add(campoDireccionCliente);
 		panelCentral.add(new JPanel());
 		panelCentral.add(new JPanel());
 		
 		/* Fila 4 */
-		JLabel etiquetaDatosMascota = new JLabel("Datos mascota");
+		final JLabel etiquetaDatosMascota = new JLabel("Datos mascota");
 		panelCentral.add(etiquetaDatosMascota);
 		panelCentral.add(new JPanel());
 		panelCentral.add(new JPanel());
@@ -97,7 +97,7 @@ public class PanelRegistroCliente extends JPanel {
 		final JTextField campoColor = new JTextField("Color");
 		campoColor.setEnabled(false);
 		panelCentral.add(campoColor);
-		JRadioButton radioButtonMacho = new JRadioButton("Macho");
+		final JRadioButton radioButtonMacho = new JRadioButton("Macho");
 		panelCentral.add(radioButtonMacho);
 		
 		/* Fila 8 */
@@ -140,42 +140,70 @@ public class PanelRegistroCliente extends JPanel {
 
 		
 		// Agrupación de botones en grupo para evitar selección múltiple
-		ButtonGroup grupoTipoMascota = new ButtonGroup();
+		final ButtonGroup grupoTipoMascota = new ButtonGroup();
 		grupoTipoMascota.add(radioButtonGato);
 		grupoTipoMascota.add(radioButtonPerro);
 		grupoTipoMascota.add(radioButtonRoedor);
 		
-		ButtonGroup grupoTipoRoedor = new ButtonGroup();
+		final ButtonGroup grupoTipoRoedor = new ButtonGroup();
 		grupoTipoRoedor.add(radioButtonConejo);
 		grupoTipoRoedor.add(radioButtonRaton);
 				
 		final ButtonGroup grupoGenero = new ButtonGroup();
 		grupoGenero.add(radioButtonMacho);
 		grupoGenero.add(radioButtonHembra);
+		
 
-		
-		
 		
 		buttonInsertar.addActionListener(new ActionListener(){
 			public void actionPerformed (ActionEvent e){
 				// CREAR CLIENTE
 				final Cliente clienteNuevo = new Cliente(campoNombreCliente.getText(), campoDNICliente.getText());
+				// Falta añadir el cliente al array de clientes
+				// listaClientes.add(clienteNuevo);
+								
 				// CREAR MASCOTA Y AÑADIRLA AL CLIENTE
-				final Mascota mascotaNueva = new Mascota (campoNombreMascota.getText(), "1", "INVESTIGAR");
-				clienteNuevo.addMascota(mascotaNueva);
+				// CAMBIARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR - COMO PUEDO USAR EL SETGENERO y SETTIPO????
+				String genero;
+				
+				if (radioButtonMacho.isSelected()) {
+					genero = "macho";
+				}
+				
+				else {
+					genero = "hembra";
+				}
+			
+				if (radioButtonGato.isSelected()) {
+					final Gato gatoNuevo = new Gato (campoNombreMascota.getText(), "1", genero, campoColor.getText());
+					clienteNuevo.addMascota(gatoNuevo);
+				}
+				
+				if (radioButtonPerro.isSelected()) {
+					final Perro perroNuevo = new Perro (campoNombreMascota.getText(), "2", genero, campoRaza.getText());
+					clienteNuevo.addMascota(perroNuevo);
+				}
+				
+				if (radioButtonRoedor.isSelected()) {
+					String tipo;
+					
+					if (radioButtonConejo.isSelected()) {
+						tipo = "conejo";
+					}
+					else {
+						tipo = "ratón";
+					}					
+					
+					final Roedor roedorNuevo = new Roedor (campoNombreMascota.getText(), "3", genero, tipo);
+					clienteNuevo.addMascota(roedorNuevo);
+				}
 				
 				System.out.println("El cliente es: " + clienteNuevo);
 				
 			}
 		});
 
-		
-
-		
-
-		
-		
-		ActionListener tipoMascoActionListener = new ActionListener() {
+		ActionListener tipoMascotaActionListener = new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource().equals(radioButtonGato)) {
@@ -203,26 +231,16 @@ public class PanelRegistroCliente extends JPanel {
 			}
 		};
 		
-		radioButtonGato.addActionListener(tipoMascoActionListener);
-		radioButtonPerro.addActionListener(tipoMascoActionListener);
-		radioButtonRoedor.addActionListener(tipoMascoActionListener);
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		radioButtonGato.addActionListener(tipoMascotaActionListener);
+		radioButtonPerro.addActionListener(tipoMascotaActionListener);
+		radioButtonRoedor.addActionListener(tipoMascotaActionListener);
 		
 		return panelCentral;
 	}
 	
+	
 
-
+	
 }
 
 
