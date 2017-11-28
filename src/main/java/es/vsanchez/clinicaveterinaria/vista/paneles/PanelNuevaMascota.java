@@ -149,14 +149,17 @@ public class PanelNuevaMascota extends JPanel {
 		buttonBuscar.addActionListener(new ActionListener(){
 			public void actionPerformed (ActionEvent e){
 			
+				// REVISAR ALGO FALLA
+				
 				/*for(int i = 0; i < listaClientes.size(); i++) {
-					if (listaClientes.get(i) = campoDNICliente.getText()) {
+					
+					Cliente cliente = listaClientes.get(i);
+					
+					if (campoDNICliente.getText() = cliente.getDni()) {
 						
-						ESPERANDO RESOLUCIÓN DE LA DUDA A ANA
-						
+						System.out.println("Se ha encontrado el cliente con DNI: " + cliente.getDni());
 					}
-				}*/
-							
+				}	*/						
 			}
 		});
 		

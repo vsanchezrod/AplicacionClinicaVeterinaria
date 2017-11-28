@@ -8,7 +8,7 @@ import es.vsanchez.clinicaveterinaria.vista.VentanaPrincipalJFrame;
 
 public class MainClass {
 	
-	List<Cliente> listaClientes;
+	private List<Cliente> listaClientes;
 	
 	public static void main(String[] args) {
 
@@ -22,9 +22,9 @@ public class MainClass {
 	}
 	
 	// Método para añadir un cliente nuevo al ArrayList de clientes
-	public void addCliente(Cliente cliente) {
+	/*public void addCliente(Cliente cliente) {
 		listaClientes.add(cliente);
-	}
+	}*/
 		
 	
 	

@@ -159,9 +159,11 @@ public class PanelRegistroCliente extends JPanel {
 			public void actionPerformed (ActionEvent e){
 				// CREAR CLIENTE
 				final Cliente clienteNuevo = new Cliente(campoNombreCliente.getText(), campoDNICliente.getText());
-				// Falta añadir el cliente al array de clientes
-				// listaClientes.add(clienteNuevo);
-								
+				//listaClientes.add(clienteNuevo);
+				
+				// TENGO QUE METER EL CLIENTE EN EL ARRAYLIST
+				
+											
 				// CREAR MASCOTA Y AÑADIRLA AL CLIENTE
 				// CAMBIARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR - COMO PUEDO USAR EL SETGENERO y SETTIPO????
 				String genero;
@@ -199,7 +201,7 @@ public class PanelRegistroCliente extends JPanel {
 				}
 				
 				System.out.println("El cliente es: " + clienteNuevo);
-				
+				System.out.println("Sus mascotas son: " + clienteNuevo.getMascotas());
 			}
 		});
 
@@ -239,7 +241,11 @@ public class PanelRegistroCliente extends JPanel {
 	}
 	
 	
-
+	private int calculaCodigoMascota() {
+		
+	
+		return 1;
+	}
 	
 }
 
