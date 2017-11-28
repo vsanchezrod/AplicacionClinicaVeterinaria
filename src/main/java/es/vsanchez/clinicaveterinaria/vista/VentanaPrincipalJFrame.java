@@ -1,17 +1,21 @@
 package es.vsanchez.clinicaveterinaria.vista;
 
 import java.awt.BorderLayout;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import es.vsanchez.clinicaveterinaria.Cliente;
 import es.vsanchez.clinicaveterinaria.vista.paneles.PanelBienvenida;
 
 public class VentanaPrincipalJFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel panelPrincipal;
-
+	private List<Cliente> listaClientes;
+	
 	public VentanaPrincipalJFrame() {
 
 		super("Clínica Veterinaria VETILERNA");
@@ -23,6 +27,8 @@ public class VentanaPrincipalJFrame extends JFrame {
 		panelPrincipal = new PanelBienvenida();
 		add(panelPrincipal, BorderLayout.CENTER);
 		setVisible(true);
+		
+		listaClientes = new ArrayList<Cliente>();
 	}
 
 	// Método que setea el panel que se va a mostrar en el JFrame
@@ -43,4 +49,14 @@ public class VentanaPrincipalJFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
 	}
+	
+	// Método para añadir un cliente nuevo al ArrayList de clientes
+	public void addCliente(Cliente cliente) {
+		listaClientes.add(cliente);
+		for (Cliente c: listaClientes) {
+			System.out.println(c);
+		}
+		
+	}
+	
 }

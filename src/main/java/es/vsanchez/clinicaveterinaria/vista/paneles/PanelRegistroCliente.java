@@ -17,14 +17,16 @@ import es.vsanchez.clinicaveterinaria.Cliente;
 import es.vsanchez.clinicaveterinaria.Gato;
 import es.vsanchez.clinicaveterinaria.Perro;
 import es.vsanchez.clinicaveterinaria.Roedor;
+import es.vsanchez.clinicaveterinaria.vista.VentanaPrincipalJFrame;
 
 public class PanelRegistroCliente extends JPanel {
 
 	private static final long serialVersionUID = 1L;
+	private VentanaPrincipalJFrame ventanaPrincipalJFrame;
 
-
-	public PanelRegistroCliente() {
+	public PanelRegistroCliente(VentanaPrincipalJFrame ventanaPrincipal) {
 		
+		this.ventanaPrincipalJFrame = ventanaPrincipal;
 		// Layout BORDERLAYAOUT
 		setLayout(new BorderLayout());
 		
@@ -159,11 +161,8 @@ public class PanelRegistroCliente extends JPanel {
 			public void actionPerformed (ActionEvent e){
 				// CREAR CLIENTE
 				final Cliente clienteNuevo = new Cliente(campoNombreCliente.getText(), campoDNICliente.getText());
-				//listaClientes.add(clienteNuevo);
+				ventanaPrincipalJFrame.addCliente(clienteNuevo);
 				
-				// TENGO QUE METER EL CLIENTE EN EL ARRAYLIST
-				
-											
 				// CREAR MASCOTA Y AÑADIRLA AL CLIENTE
 				// CAMBIARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR - COMO PUEDO USAR EL SETGENERO y SETTIPO????
 				String genero;
@@ -200,7 +199,6 @@ public class PanelRegistroCliente extends JPanel {
 					clienteNuevo.addMascota(roedorNuevo);
 				}
 				
-				System.out.println("El cliente es: " + clienteNuevo);
 				System.out.println("Sus mascotas son: " + clienteNuevo.getMascotas());
 			}
 		});

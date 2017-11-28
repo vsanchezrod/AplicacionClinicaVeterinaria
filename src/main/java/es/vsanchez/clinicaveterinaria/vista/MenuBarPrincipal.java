@@ -34,11 +34,11 @@ public class MenuBarPrincipal extends JMenuBar {
 			public void actionPerformed(ActionEvent e) {
 				
 				if (e.getSource().equals(registro)) {
-					ventanaPrincipalJFrame.setPanelPrincipal(new PanelRegistroCliente());
+					ventanaPrincipalJFrame.setPanelPrincipal(new PanelRegistroCliente(ventanaPrincipalJFrame));
 				} else if (e.getSource().equals(nuevaMascota)) {
-					ventanaPrincipalJFrame.setPanelPrincipal(new PanelNuevaMascota());
+					ventanaPrincipalJFrame.setPanelPrincipal(new PanelNuevaMascota(ventanaPrincipalJFrame));
 				} else if (e.getSource().equals(tratamiento)) {
-					ventanaPrincipalJFrame.setPanelPrincipal(new PanelTratamiento());
+					ventanaPrincipalJFrame.setPanelPrincipal(new PanelTratamiento(ventanaPrincipalJFrame));
 				}
 			}
 		};

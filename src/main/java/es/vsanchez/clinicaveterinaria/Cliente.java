@@ -47,7 +47,7 @@ public class Cliente {
 	// Método toString que sobrescribe al método con el mismo nombre heredado de la clase Object
 	@Override
 	public String toString() {
-		return this.nombre + " con DNI " + this.dni + " tiene la siguiente mascota: " + listaMascotas + "." ;
+		return this.nombre + " con DNI " + this.dni + " tiene las siguientes mascotas: " + this.getMascotas() + "." ;
 	}
 	
 	// Método para añadir mascota al ArrayList
@@ -58,7 +58,6 @@ public class Cliente {
 	
 	// NO SE SI TENGO QUE HACER ESTO
 	public List<Mascota> getMascotas() {
-		
 		return listaMascotas;
 	}
 	

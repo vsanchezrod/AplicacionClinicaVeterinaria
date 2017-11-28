@@ -17,13 +17,17 @@ import es.vsanchez.clinicaveterinaria.Cliente;
 import es.vsanchez.clinicaveterinaria.Gato;
 import es.vsanchez.clinicaveterinaria.Perro;
 import es.vsanchez.clinicaveterinaria.Roedor;
+import es.vsanchez.clinicaveterinaria.vista.VentanaPrincipalJFrame;
 
 public class PanelNuevaMascota extends JPanel {
 
 	private static final long serialVersionUID = 1L;
+	private VentanaPrincipalJFrame ventanaPrincipalJFrame;
+	
+	public PanelNuevaMascota(VentanaPrincipalJFrame ventanaPrincipal) {
 
-	public PanelNuevaMascota() {
-
+		this.ventanaPrincipalJFrame = ventanaPrincipal;
+		
 		setLayout(new BorderLayout());
 
 		JPanel panelMargenSuperior = new JPanel();
@@ -159,7 +163,7 @@ public class PanelNuevaMascota extends JPanel {
 						
 						System.out.println("Se ha encontrado el cliente con DNI: " + cliente.getDni());
 					}
-				}	*/						
+				}*/							
 			}
 		});
 		

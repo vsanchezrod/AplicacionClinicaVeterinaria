@@ -13,11 +13,16 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import es.vsanchez.clinicaveterinaria.vista.VentanaPrincipalJFrame;
+
 public class PanelTratamiento extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-
-	public PanelTratamiento() {
+	private VentanaPrincipalJFrame ventanaPrincipalJFrame;
+	
+	public PanelTratamiento(VentanaPrincipalJFrame ventanaPrincipal) {
+		
+		this.ventanaPrincipalJFrame = ventanaPrincipal;
 		
 		setLayout(new BorderLayout());
 
@@ -46,7 +51,7 @@ public class PanelTratamiento extends JPanel {
 	private JPanel construirPanelCentral() {
 		
 		// Se instancia un JPanel con un layout de tipo GRIDBAGLAYAOUT
-		JPanel panelCentral = new JPanel();
+		final JPanel panelCentral = new JPanel();
 		panelCentral.setLayout(new GridBagLayout());
 		
 		// Se instancia un objeto de la clase GridBagConstraints para configurar las celdas
@@ -54,7 +59,7 @@ public class PanelTratamiento extends JPanel {
 		gridConstraints.insets = new Insets(10,0,10,100);
 				
 		/* Fila 1*/
-		JTextField campoDNICliente = new JTextField("DNI Cliente");
+		final JTextField campoDNICliente = new JTextField("DNI Cliente");
 		gridConstraints.anchor = GridBagConstraints.WEST;
 		gridConstraints.gridx = 0;
 		gridConstraints.gridy = 0;
@@ -63,7 +68,7 @@ public class PanelTratamiento extends JPanel {
 		campoDNICliente.setPreferredSize(new Dimension(300, 30));
 		panelCentral.add(campoDNICliente, gridConstraints);
 		
-		JButton buttonBuscar = new JButton("Buscar");
+		final JButton buttonBuscar = new JButton("Buscar");
 		gridConstraints.anchor = GridBagConstraints.WEST;
 		gridConstraints.gridx = 1;
 		gridConstraints.gridy = 0;
@@ -72,7 +77,7 @@ public class PanelTratamiento extends JPanel {
 		buttonBuscar.setPreferredSize(new Dimension(100, 30));
 		panelCentral.add(buttonBuscar, gridConstraints);
 		
-		JComboBox<String> comboBoxMascotas = new JComboBox<String>();
+		final JComboBox<String> comboBoxMascotas = new JComboBox<String>();
 		comboBoxMascotas.addItem("Mascotas");
 		gridConstraints.anchor = GridBagConstraints.WEST;
 		gridConstraints.gridx = 2;
@@ -84,7 +89,7 @@ public class PanelTratamiento extends JPanel {
 		panelCentral.add(comboBoxMascotas, gridConstraints);
 		
 		/* Fila 2*/
-		JLabel etiquetaDatosMascota = new JLabel("Datos mascota");
+		final JLabel etiquetaDatosMascota = new JLabel("Datos mascota");
 		gridConstraints.anchor = GridBagConstraints.WEST;
 		gridConstraints.gridx = 0;
 		gridConstraints.gridy = 1;
@@ -94,7 +99,7 @@ public class PanelTratamiento extends JPanel {
 		panelCentral.add(etiquetaDatosMascota, gridConstraints);
 	
 		/* Fila 3*/
-		JLabel etiquetaTratamiento = new JLabel("Tratamiento");
+		final JLabel etiquetaTratamiento = new JLabel("Tratamiento");
 		gridConstraints.anchor = GridBagConstraints.WEST;
 		gridConstraints.gridx = 0;
 		gridConstraints.gridy = 2;
@@ -105,7 +110,7 @@ public class PanelTratamiento extends JPanel {
 	
 		/* Fila 4*/
 		
-		JTextField campoFecha = new JTextField("Fecha");
+		final JTextField campoFecha = new JTextField("Fecha");
 		gridConstraints.anchor = GridBagConstraints.WEST;
 		gridConstraints.gridx = 0;
 		gridConstraints.gridy = 3;
@@ -115,7 +120,7 @@ public class PanelTratamiento extends JPanel {
 		campoFecha.setPreferredSize(new Dimension(300, 30));
 		panelCentral.add(campoFecha, gridConstraints);
 		
-		JTextField campoTratamiento = new JTextField("Tratamiento");
+		final JTextField campoTratamiento = new JTextField("Tratamiento");
 		gridConstraints.anchor = GridBagConstraints.WEST;
 		gridConstraints.gridx = 1;
 		gridConstraints.gridy = 3;
@@ -125,7 +130,7 @@ public class PanelTratamiento extends JPanel {
 		campoTratamiento.setPreferredSize(new Dimension(300, 30));
 		panelCentral.add(campoTratamiento, gridConstraints);
 
-		JButton buttonAnadir = new JButton("Añadir");
+		final JButton buttonAnadir = new JButton("Añadir");
 		gridConstraints.anchor = GridBagConstraints.EAST;
 		gridConstraints.gridx = 2;
 		gridConstraints.gridy = 3;
@@ -136,7 +141,7 @@ public class PanelTratamiento extends JPanel {
 		panelCentral.add(buttonAnadir, gridConstraints);
 
 		/* Fila 5*/
-		JTextArea textAreaTratamiento = new JTextArea();
+		final JTextArea textAreaTratamiento = new JTextArea();
 		gridConstraints.anchor = GridBagConstraints.WEST;
 		gridConstraints.gridx = 0;
 		gridConstraints.gridy = 4;
