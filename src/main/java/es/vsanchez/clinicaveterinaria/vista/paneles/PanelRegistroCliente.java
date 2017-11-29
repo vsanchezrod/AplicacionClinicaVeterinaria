@@ -160,6 +160,9 @@ public class PanelRegistroCliente extends JPanel {
 		
 		buttonInsertar.addActionListener(new ActionListener(){
 			public void actionPerformed (ActionEvent e){
+				
+				// ¿¿¿COMPROBAR SI EL CLIENTE EXISTE???
+				
 				// CREAR CLIENTE
 				final Cliente clienteNuevo = new Cliente(campoNombreCliente.getText(), campoDNICliente.getText());
 								
@@ -200,7 +203,8 @@ public class PanelRegistroCliente extends JPanel {
 				}
 				// AÑADO EL CLIENTE CON SU MASCOTA, AL ARRAYLIST DE CLIENTES
 				ventanaPrincipalJFrame.addCliente(clienteNuevo);
-				System.out.println("Sus mascotas son: " + clienteNuevo.getMascotas());
+				System.out.println("Cliente: " + clienteNuevo);
+				
 			}
 		});
 

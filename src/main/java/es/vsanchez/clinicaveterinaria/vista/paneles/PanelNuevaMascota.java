@@ -157,7 +157,7 @@ public class PanelNuevaMascota extends JPanel {
 			public void actionPerformed (ActionEvent e){
 			
 				Cliente clienteBuscado = ventanaPrincipalJFrame.buscarCliente(campoDNICliente.getText());
-				verificarSiClienteEsNulo(etiquetaNombreCliente);	
+				verificarSiClienteEsNulo(clienteBuscado, etiquetaNombreCliente);	
 			}
 		});
 		
@@ -166,6 +166,10 @@ public class PanelNuevaMascota extends JPanel {
 											
 				// SI EL USUARIO EXISTE: ===> CREAR MASCOTA Y AÑADIRLA AL CLIENTE
 				// CAMBIARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR - COMO PUEDO USAR EL SETGENERO y SETTIPO????
+				// Método cliente
+				
+				Cliente clienteBuscado = ventanaPrincipalJFrame.buscarCliente(campoDNICliente.getText());
+				
 				String genero;
 				
 				if (radioButtonMacho.isSelected()) {
@@ -178,7 +182,6 @@ public class PanelNuevaMascota extends JPanel {
 			
 				if (radioButtonGato.isSelected()) {
 					final Gato gatoNuevo = new Gato (campoNombreMascota.getText(), "1", genero, campoColor.getText());
-					
 					clienteBuscado.addMascota(gatoNuevo);
 				}
 				
@@ -201,6 +204,7 @@ public class PanelNuevaMascota extends JPanel {
 					clienteBuscado.addMascota(roedorNuevo);
 				}
 				
+				System.out.println("Cliente: " + clienteBuscado);
 			}
 		});
 
@@ -238,13 +242,13 @@ public class PanelNuevaMascota extends JPanel {
 
 	}
 	
-	private void verificarSiClienteEsNulo(JLabel etiqueta){
+	private void verificarSiClienteEsNulo(Cliente clienteBuscado, JLabel etiqueta){
 		if (clienteBuscado == null) {
 			etiqueta.setText("No existe cliente con ese DNI!");
 			System.out.println("No existe cliente con ese DNI!");
 		}
 		else {
-			etiqueta.setText(clienteBuscado.getNombre());
+			etiqueta.setText("Cliente: " + clienteBuscado.getNombre() + " DNI: " + clienteBuscado.getDni());
 		}
 	}
 

@@ -54,7 +54,7 @@ public class VentanaPrincipalJFrame extends JFrame {
 	// Método para añadir un cliente nuevo al ArrayList de clientes
 	public void addCliente(Cliente cliente) {
 		listaClientes.add(cliente);
-		System.out.println("Un cliente ha sido añadido cliente.");
+		System.out.println("Un cliente ha sido añadido.");
 		listarClientes();
 	}
 	
@@ -65,23 +65,25 @@ public class VentanaPrincipalJFrame extends JFrame {
 		}
 	}
 	
-	
-	// PROBADO APARTE FUNCIONA
 	public Cliente buscarCliente(String dni) {
-		System.out.println("Buscando cliente.........");			
+		System.out.println("Buscando cliente.........");
+		System.out.println("El DNI introducido es: " + dni);
 		for(int i = 0; i < listaClientes.size(); i++) {
 			Cliente cliente = listaClientes.get(i);
-			if (dni == cliente.getDni()) {
+			System.out.println("El cliente de la posición de la lista: " + i + " tiene un DNI: " + cliente.getDni());
+			if (cliente.getDni().equals(dni)) {
 				System.out.println("Se ha encontrado el cliente con DNI: " + cliente.getDni());
 				return cliente;
 			}
-			
-			else {
-				System.out.println("No ha encontrado el cliente");
-			}
 		}
 		
+		System.out.println("No ha encontrado el cliente con ese DNI!");
 		return null;
 	}
-	
+
+	/*public Cliente getCliente(int numero) {
+		return listaClientes.get(numero);
+		 
+	}*/
+
 }
