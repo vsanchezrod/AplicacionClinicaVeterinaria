@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -13,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import es.vsanchez.clinicaveterinaria.Cliente;
 import es.vsanchez.clinicaveterinaria.vista.VentanaPrincipalJFrame;
 
 public class PanelTratamiento extends JPanel {
@@ -150,7 +153,28 @@ public class PanelTratamiento extends JPanel {
 		textAreaTratamiento.setEnabled(false);
 		textAreaTratamiento.setPreferredSize(new Dimension(710, 400));
 		panelCentral.add(textAreaTratamiento, gridConstraints);
+		
+		// EVENTO EN EL BOTÓN BUSCAR - Buscará el DNI del Cliente introducido.
+		buttonBuscar.addActionListener(new ActionListener(){
+			public void actionPerformed (ActionEvent e){
+				Cliente clienteBuscado = ventanaPrincipalJFrame.buscarCliente(campoDNICliente.getText());
 				
+				// Si se ha localizado el cliente se añaden sus mascotas al JCOMBOBOX
+				comboBoxMascotas.removeItem("Mascotas");
+				
+				// Tengo que recorrer el arraylist de mascotas y añadir cada mascota al comboBox
+				
+				for(int i = 0; i < clienteBuscado.getMascotas().size(); i++) {
+				
+					comboBoxMascotas.addItem(clienteBuscado.getMascotas().get(i).getNombre());
+					System.out.println("Mascota añadida: " + clienteBuscado.getMascotas().get(i).getNombre());
+				}
+				
+			}
+		});
+		
+				
+		
 		return panelCentral; 
 	}
 			

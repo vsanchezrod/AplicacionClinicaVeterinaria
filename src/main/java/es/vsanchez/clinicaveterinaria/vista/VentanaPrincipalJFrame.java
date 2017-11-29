@@ -81,9 +81,4 @@ public class VentanaPrincipalJFrame extends JFrame {
 		return null;
 	}
 
-	/*public Cliente getCliente(int numero) {
-		return listaClientes.get(numero);
-		 
-	}*/
-
 }
