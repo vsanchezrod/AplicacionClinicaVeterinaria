@@ -67,7 +67,8 @@ public class PanelRegistroCliente extends JPanel {
 		panelCentral.add(campoNombreCliente);
 		final JTextField campoDNICliente = new JTextField("DNI Cliente");
 		panelCentral.add(campoDNICliente);
-		panelCentral.add(new JPanel());
+		final JLabel etiqueraErrorCliente = new JLabel();
+		panelCentral.add(etiqueraErrorCliente);                            /////////// AÑADIDO PARA MOSTRAR CUNADO UN CLIENTE YA EXISTE
 
 		/* Fila 3 */
 		final JTextField campoDireccionCliente = new JTextField("Dirección Cliente");
@@ -161,9 +162,8 @@ public class PanelRegistroCliente extends JPanel {
 			public void actionPerformed (ActionEvent e){
 				// CREAR CLIENTE
 				final Cliente clienteNuevo = new Cliente(campoNombreCliente.getText(), campoDNICliente.getText());
-				ventanaPrincipalJFrame.addCliente(clienteNuevo);
-				
-				// CREAR MASCOTA Y AÑADIRLA AL CLIENTE
+								
+				// CREAR MASCOTA Y SE LA AÑADO AL CLIENTE
 				// CAMBIARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR - COMO PUEDO USAR EL SETGENERO y SETTIPO????
 				String genero;
 				
@@ -198,7 +198,8 @@ public class PanelRegistroCliente extends JPanel {
 					final Roedor roedorNuevo = new Roedor (campoNombreMascota.getText(), "3", genero, tipo);
 					clienteNuevo.addMascota(roedorNuevo);
 				}
-				
+				// AÑADO EL CLIENTE CON SU MASCOTA, AL ARRAYLIST DE CLIENTES
+				ventanaPrincipalJFrame.addCliente(clienteNuevo);
 				System.out.println("Sus mascotas son: " + clienteNuevo.getMascotas());
 			}
 		});

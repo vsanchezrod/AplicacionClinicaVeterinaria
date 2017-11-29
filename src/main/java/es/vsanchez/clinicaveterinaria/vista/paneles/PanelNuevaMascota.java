@@ -164,10 +164,6 @@ public class PanelNuevaMascota extends JPanel {
 		buttonInsertar.addActionListener(new ActionListener(){
 			public void actionPerformed (ActionEvent e){
 											
-				// SI EL USUARIO NO EXISTE:
-				System.out.println("No existe cliente con DNI: " + campoDNICliente.getText());
-				
-				
 				// SI EL USUARIO EXISTE: ===> CREAR MASCOTA Y AÑADIRLA AL CLIENTE
 				// CAMBIARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR - COMO PUEDO USAR EL SETGENERO y SETTIPO????
 				String genero;
@@ -244,7 +240,8 @@ public class PanelNuevaMascota extends JPanel {
 	
 	private void verificarSiClienteEsNulo(JLabel etiqueta){
 		if (clienteBuscado == null) {
-			etiqueta.setText("No se ha encontrado cliente!");
+			etiqueta.setText("No existe cliente con ese DNI!");
+			System.out.println("No existe cliente con ese DNI!");
 		}
 		else {
 			etiqueta.setText(clienteBuscado.getNombre());
