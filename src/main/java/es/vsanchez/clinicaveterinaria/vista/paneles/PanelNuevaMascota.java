@@ -23,8 +23,7 @@ public class PanelNuevaMascota extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private VentanaPrincipalJFrame ventanaPrincipalJFrame;
-	private Cliente clienteBuscado;
-	
+		
 	public PanelNuevaMascota(VentanaPrincipalJFrame ventanaPrincipal) {
 
 		this.ventanaPrincipalJFrame = ventanaPrincipal;

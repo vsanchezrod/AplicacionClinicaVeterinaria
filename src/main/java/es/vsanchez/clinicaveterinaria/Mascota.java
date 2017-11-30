@@ -61,6 +61,19 @@ public class Mascota {
 	
 	// Método que añade tratamientos al HashMap
 	public void addTratamiento(String fecha, String tratamiento) {
+		System.out.println("Tratamiento añadido");
 		mapTratamiento.put(fecha, tratamiento);
 	}
+	
+	// Método que contiene un foreach que devuelve lo que haya almacenado en el mapa de tratamientos y forma de set
+	// Un set tiene como argumento un Map.Entry ==> set<Map.Entry>
+	public void mostrarTratamientos() {
+		System.out.println("Mostrando tratamientos...");
+		for (Map.Entry<String, String> tratamiento: mapTratamiento.entrySet()) {
+			String claveFecha = tratamiento.getKey();
+			String valorTratamiento = tratamiento.getValue();
+			System.out.println("Fecha del tratamiento: " + claveFecha + ". Tratamiento: " + valorTratamiento);
+		}
+	}	
+	
 }

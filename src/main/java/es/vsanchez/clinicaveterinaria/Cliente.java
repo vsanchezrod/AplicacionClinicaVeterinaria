@@ -61,5 +61,9 @@ public class Cliente {
 		return listaMascotas;
 	}
 	
-	
+	public Mascota buscarMascota(int posicion, List<Mascota> listaMascotas) {
+		System.out.println("Buscando mascota.........");
+		Mascota mascota = listaMascotas.get(posicion);
+		return mascota;
+	}
 }

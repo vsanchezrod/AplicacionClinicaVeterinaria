@@ -16,6 +16,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import es.vsanchez.clinicaveterinaria.Cliente;
+import es.vsanchez.clinicaveterinaria.Mascota;
 import es.vsanchez.clinicaveterinaria.vista.VentanaPrincipalJFrame;
 
 public class PanelTratamiento extends JPanel {
@@ -154,28 +155,89 @@ public class PanelTratamiento extends JPanel {
 		textAreaTratamiento.setPreferredSize(new Dimension(710, 400));
 		panelCentral.add(textAreaTratamiento, gridConstraints);
 		
+
+		
 		// EVENTO EN EL BOTÓN BUSCAR - Buscará el DNI del Cliente introducido.
 		buttonBuscar.addActionListener(new ActionListener(){
 			public void actionPerformed (ActionEvent e){
 				Cliente clienteBuscado = ventanaPrincipalJFrame.buscarCliente(campoDNICliente.getText());
 				
-				// Si se ha localizado el cliente se añaden sus mascotas al JCOMBOBOX
-				comboBoxMascotas.removeItem("Mascotas");
-				
-				// Tengo que recorrer el arraylist de mascotas y añadir cada mascota al comboBox
-				
-				for(int i = 0; i < clienteBuscado.getMascotas().size(); i++) {
-				
-					comboBoxMascotas.addItem(clienteBuscado.getMascotas().get(i).getNombre());
-					System.out.println("Mascota añadida: " + clienteBuscado.getMascotas().get(i).getNombre());
-				}
-				
+				// Verifica si el cliente existe, y si es así le añade las mascotas al comboBox
+				verificarCliente(clienteBuscado, comboBoxMascotas, campoFecha, campoTratamiento, textAreaTratamiento);
+			
 			}
 		});
 		
+		buttonAnadir.addActionListener(new ActionListener(){
+			public void actionPerformed (ActionEvent e){
+						
+				// Tengo que coger el INDEX de la mascota seleccionada en el comboBox y añadirle un tratamiento
+				// Busco cliente, recupero índice de la lista de mascotas, y busco la mascota con ese indice en el arraylist de mascotas del cliente
+				Cliente clienteBuscado = ventanaPrincipalJFrame.buscarCliente(campoDNICliente.getText());
+				int posicionMascota = comboBoxMascotas.getSelectedIndex();
 				
-		
+				// Uso método para buscar en el array de mascotas la mascota que pertenece a ese índice
+				Mascota mascotaBuscada = clienteBuscado.buscarMascota(posicionMascota, clienteBuscado.getMascotas());
+				
+				// Añado el tratamiento a la mascota
+				mascotaBuscada.addTratamiento(campoFecha.getText(),campoTratamiento.getText());
+				
+				// Muestro por consola el tratamiento
+				System.out.println("Tratamiento añadido a " + mascotaBuscada.getNombre() + " a fecha de: " + campoFecha.getText() 
+						+ " corresponde con un tratamiento de: " + campoTratamiento.getText() + ". Descripción del tratamiento: " 
+						+ textAreaTratamiento.getText());
+				
+				resetearCamposTratamiento(campoFecha, campoTratamiento, textAreaTratamiento);
+				
+				// VEO LOS TRATAMIENTOS DE ESA MASCOTA
+				mascotaBuscada.mostrarTratamientos();
+				
+			}	
+		});
+					
 		return panelCentral; 
+		
 	}
+	
+	private void verificarCliente(Cliente clienteBuscado, JComboBox<String> comboBoxMascotas, JTextField fecha, JTextField tratamiento, JTextArea areaTratamiento){
+				
+		if (clienteBuscado == null) {
+			System.out.println("No existe cliente con ese DNI!");
+			comboBoxMascotas.removeAllItems();
+			deshabilitarTratamiento(fecha, tratamiento, areaTratamiento);
+		}
+		else {
+			addMascotasComboBox(clienteBuscado, comboBoxMascotas);
+			habilitarTratamiento(fecha, tratamiento, areaTratamiento);
+		}
+	}
+		
+	private void addMascotasComboBox(Cliente clienteBuscado, JComboBox<String> comboBoxMascotas) {
+		comboBoxMascotas.removeAllItems();
+		
+		for(int i = 0; i < clienteBuscado.getMascotas().size(); i++) {
 			
+			comboBoxMascotas.addItem(clienteBuscado.getMascotas().get(i).getNombre());
+			System.out.println("Mascota añadida: " + clienteBuscado.getMascotas().get(i).getNombre());
+		}
+	}
+	
+	private void habilitarTratamiento(JTextField fecha, JTextField tratamiento, JTextArea areaTratamiento) {
+		fecha.setEnabled(true);
+		tratamiento.setEnabled(true);
+		areaTratamiento.setEnabled(true);
+	}
+	
+	private void deshabilitarTratamiento(JTextField fecha, JTextField tratamiento, JTextArea areaTratamiento) {
+		fecha.setEnabled(false);
+		tratamiento.setEnabled(false);
+		areaTratamiento.setEnabled(false);
+	}
+
+	private void resetearCamposTratamiento(JTextField fecha, JTextField tratamiento, JTextArea areaTratamiento) {
+		fecha.setText("Fecha");
+		tratamiento.setText("Tratamiento");
+		areaTratamiento.setText(null);
+	}
+		
 }
