@@ -93,12 +93,14 @@ public class PanelNuevaMascota extends JPanel {
 		panelCentral.add(new JPanel());
 
 		/* Fila 7 */
+		// Pongo por defecto los botones de gato y macho seleccionados. Para evitar que se metan mascotas sin esos campos.
 		final JRadioButton radioButtonGato = new JRadioButton("Gato");
+		radioButtonGato.setSelected(true);
 		panelCentral.add(radioButtonGato);
 		final JTextField campoColor = new JTextField("Color");
-		campoColor.setEnabled(false);
 		panelCentral.add(campoColor);
 		final JRadioButton radioButtonMacho = new JRadioButton("Macho");
+		radioButtonMacho.setSelected(true);
 		panelCentral.add(radioButtonMacho);
 
 		/* Fila 8 */
@@ -119,6 +121,8 @@ public class PanelNuevaMascota extends JPanel {
 		/* Fila 10 */
 		panelCentral.add(new JPanel());
 		final JRadioButton radioButtonConejo = new JRadioButton("Conejo");
+		// Aunque este radiobutton esté desactivado lo marco por defecto. Para evitar que no se rellene
+		radioButtonConejo.setSelected(true);
 		radioButtonConejo.setEnabled(false);
 		panelCentral.add(radioButtonConejo);
 		panelCentral.add(new JPanel());
@@ -204,6 +208,7 @@ public class PanelNuevaMascota extends JPanel {
 				}
 				
 				System.out.println("Cliente: " + clienteBuscado);
+				reiniciarMascota(campoNombreMascota, campoColor, campoRaza);
 			}
 		});
 
@@ -212,18 +217,22 @@ public class PanelNuevaMascota extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource().equals(radioButtonGato)) {
 					campoColor.setEnabled(true);
+					campoRaza.setText("raza");
 					campoRaza.setEnabled(false);
 					radioButtonRaton.setEnabled(false);
 					radioButtonConejo.setEnabled(false);
 				}
 				if (e.getSource().equals(radioButtonPerro)){
+					campoColor.setText("color");
 					campoColor.setEnabled(false);
 					campoRaza.setEnabled(true);
 					radioButtonRaton.setEnabled(false);
 					radioButtonConejo.setEnabled(false);
 				}
 				if (e.getSource().equals(radioButtonRoedor)) {
+					campoColor.setText("color");
 					campoColor.setEnabled(false);
+					campoRaza.setText("raza");
 					campoRaza.setEnabled(false);
 					radioButtonRaton.setEnabled(true);
 					radioButtonConejo.setEnabled(true);
@@ -250,5 +259,12 @@ public class PanelNuevaMascota extends JPanel {
 			etiqueta.setText("Cliente: " + clienteBuscado.getNombre() + " DNI: " + clienteBuscado.getDni());
 		}
 	}
-
+	
+	private void reiniciarMascota(JTextField mascota, JTextField color, JTextField raza) {
+		
+		mascota.setText("Nombre Mascota");
+		color.setText("color");
+		raza.setText("raza");
+	}
+	
 }

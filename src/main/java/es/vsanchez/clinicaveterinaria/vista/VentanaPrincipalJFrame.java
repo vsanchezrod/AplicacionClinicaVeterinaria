@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 
 import es.vsanchez.clinicaveterinaria.Cliente;
 import es.vsanchez.clinicaveterinaria.vista.paneles.PanelBienvenida;
@@ -80,4 +81,17 @@ public class VentanaPrincipalJFrame extends JFrame {
 		return null;
 	}
 
+	public boolean buscarSiExisteCliente(String dni) {
+		System.out.println("Buscando si el cliente ya existe");
+		for(int i = 0; i < listaClientes.size(); i++) {
+			Cliente cliente = listaClientes.get(i);
+			if (cliente.getDni().equals(dni)) {
+				System.out.println("El cliente con DNI " + cliente.getDni() + " ya existe.");
+				return true;
+			}
+		}
+		
+		System.out.println("No existe el cliente, REGISTREMOSLO!");
+		return false;
+	}
 }

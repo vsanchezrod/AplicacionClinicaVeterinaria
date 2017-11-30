@@ -56,6 +56,9 @@ public class PanelRegistroCliente extends JPanel {
 		final JPanel panelCentral = new JPanel();
 		panelCentral.setLayout(new GridLayout(12, 3, 100, 20));		
 		
+		// Se han establecido por defecto los radiobuttons marcados de : gato, color, conejo y macho
+		// A fin de evitar que se queden datos sin rellenar de la mascota.
+		
 		/* Fila 1 */
 		final JLabel etiquetaRegistroCliente = new JLabel("Registro Cliente");
 		panelCentral.add(etiquetaRegistroCliente);
@@ -67,8 +70,9 @@ public class PanelRegistroCliente extends JPanel {
 		panelCentral.add(campoNombreCliente);
 		final JTextField campoDNICliente = new JTextField("DNI Cliente");
 		panelCentral.add(campoDNICliente);
+		// AÑADIDO PARA MOSTRAR CUANDO UN CLIENTE YA EXISTE ---------------- QUITAR SI NO LO IMPLEMENTO
 		final JLabel etiqueraErrorCliente = new JLabel();
-		panelCentral.add(etiqueraErrorCliente);                            /////////// AÑADIDO PARA MOSTRAR CUNADO UN CLIENTE YA EXISTE
+		panelCentral.add(etiqueraErrorCliente);                            
 
 		/* Fila 3 */
 		final JTextField campoDireccionCliente = new JTextField("Dirección Cliente");
@@ -96,11 +100,12 @@ public class PanelRegistroCliente extends JPanel {
 				
 		/* Fila 7 */
 		final JRadioButton radioButtonGato = new JRadioButton("Gato");
+		radioButtonGato.setSelected(true);
 		panelCentral.add(radioButtonGato);
 		final JTextField campoColor = new JTextField("Color");
-		campoColor.setEnabled(false);
 		panelCentral.add(campoColor);
 		final JRadioButton radioButtonMacho = new JRadioButton("Macho");
+		radioButtonMacho.setSelected(true);
 		panelCentral.add(radioButtonMacho);
 		
 		/* Fila 8 */
@@ -123,6 +128,7 @@ public class PanelRegistroCliente extends JPanel {
 		/* Fila 10 */
 		panelCentral.add(new JPanel());
 		final JRadioButton radioButtonConejo = new JRadioButton("Conejo");
+		radioButtonConejo.setSelected(true);
 		radioButtonConejo.setEnabled(false);
 		panelCentral.add(radioButtonConejo);
 		panelCentral.add(new JPanel());
@@ -162,49 +168,57 @@ public class PanelRegistroCliente extends JPanel {
 			public void actionPerformed (ActionEvent e){
 				
 				// ¿¿¿COMPROBAR SI EL CLIENTE EXISTE???
+				boolean existeCliente = ventanaPrincipalJFrame.buscarSiExisteCliente(campoDNICliente.getText());
 				
-				// CREAR CLIENTE
-				final Cliente clienteNuevo = new Cliente(campoNombreCliente.getText(), campoDNICliente.getText());
-								
-				// CREAR MASCOTA Y SE LA AÑADO AL CLIENTE
-				// CAMBIARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR - COMO PUEDO USAR EL SETGENERO y SETTIPO????
-				String genero;
-				
-				if (radioButtonMacho.isSelected()) {
-					genero = "macho";
+				if (existeCliente) {
+					System.out.println("ERROR! Ese cliente ya existe.");
 				}
 				
 				else {
-					genero = "hembra";
-				}
-			
-				if (radioButtonGato.isSelected()) {
-					final Gato gatoNuevo = new Gato (campoNombreMascota.getText(), "1", genero, campoColor.getText());
-					clienteNuevo.addMascota(gatoNuevo);
-				}
-				
-				if (radioButtonPerro.isSelected()) {
-					final Perro perroNuevo = new Perro (campoNombreMascota.getText(), "2", genero, campoRaza.getText());
-					clienteNuevo.addMascota(perroNuevo);
-				}
-				
-				if (radioButtonRoedor.isSelected()) {
-					String tipo;
+					// CREAR CLIENTE
+					final Cliente clienteNuevo = new Cliente(campoNombreCliente.getText(), campoDNICliente.getText());
+									
+					// CREAR MASCOTA Y SE LA AÑADO AL CLIENTE
+					// CAMBIARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR - COMO PUEDO USAR EL SETGENERO y SETTIPO????
+					String genero;
 					
-					if (radioButtonConejo.isSelected()) {
-						tipo = "conejo";
+					if (radioButtonMacho.isSelected()) {
+						genero = "macho";
 					}
-					else {
-						tipo = "ratón";
-					}					
 					
-					final Roedor roedorNuevo = new Roedor (campoNombreMascota.getText(), "3", genero, tipo);
-					clienteNuevo.addMascota(roedorNuevo);
-				}
-				// AÑADO EL CLIENTE CON SU MASCOTA, AL ARRAYLIST DE CLIENTES
-				ventanaPrincipalJFrame.addCliente(clienteNuevo);
-				System.out.println("Cliente: " + clienteNuevo);
+					else {
+						genero = "hembra";
+					}
 				
+					if (radioButtonGato.isSelected()) {
+						final Gato gatoNuevo = new Gato (campoNombreMascota.getText(), "1", genero, campoColor.getText());
+						clienteNuevo.addMascota(gatoNuevo);
+					}
+					
+					if (radioButtonPerro.isSelected()) {
+						final Perro perroNuevo = new Perro (campoNombreMascota.getText(), "2", genero, campoRaza.getText());
+						clienteNuevo.addMascota(perroNuevo);
+					}
+					
+					if (radioButtonRoedor.isSelected()) {
+						String tipo;
+						
+						if (radioButtonConejo.isSelected()) {
+							tipo = "conejo";
+						}
+						else {
+							tipo = "ratón";
+						}					
+						
+						final Roedor roedorNuevo = new Roedor (campoNombreMascota.getText(), "3", genero, tipo);
+						clienteNuevo.addMascota(roedorNuevo);
+					}
+					// AÑADO EL CLIENTE CON SU MASCOTA, AL ARRAYLIST DE CLIENTES
+					ventanaPrincipalJFrame.addCliente(clienteNuevo);
+					System.out.println("Cliente: " + clienteNuevo);
+					
+				}
+				reiniciarFormulario(campoNombreCliente, campoDNICliente, campoDireccionCliente,campoNombreMascota, campoColor, campoRaza);
 			}
 		});
 
@@ -213,12 +227,14 @@ public class PanelRegistroCliente extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource().equals(radioButtonGato)) {
 					campoColor.setEnabled(true);
+					campoRaza.setText("raza");
 					campoRaza.setEnabled(false);
 					etiquetaEspecializacionRoedor.setEnabled(false);
 					radioButtonRaton.setEnabled(false);
 					radioButtonConejo.setEnabled(false);
 				}
 				if (e.getSource().equals(radioButtonPerro)){
+					campoColor.setText("color");
 					campoColor.setEnabled(false);
 					campoRaza.setEnabled(true);
 					etiquetaEspecializacionRoedor.setEnabled(false);
@@ -226,7 +242,9 @@ public class PanelRegistroCliente extends JPanel {
 					radioButtonConejo.setEnabled(false);
 				}
 				if (e.getSource().equals(radioButtonRoedor)) {
+					campoColor.setText("color");
 					campoColor.setEnabled(false);
+					campoRaza.setText("raza");
 					campoRaza.setEnabled(false);
 					etiquetaEspecializacionRoedor.setEnabled(true);
 					radioButtonRaton.setEnabled(true);
@@ -243,13 +261,16 @@ public class PanelRegistroCliente extends JPanel {
 		return panelCentral;
 	}
 	
-	
-	private int calculaCodigoMascota() {
+	private void reiniciarFormulario(JTextField nombre, JTextField dni, JTextField direccion, JTextField mascota, JTextField color, JTextField raza) {
 		
-	
-		return 1;
+		nombre.setText("Nombre Cliente");
+		dni.setText("DNI Cliente");
+		direccion.setText("Dirección Cliente");
+		mascota.setText("Nombre Mascota");
+		color.setText("color");
+		raza.setText("raza");
 	}
-	
+			
 }
 
 
