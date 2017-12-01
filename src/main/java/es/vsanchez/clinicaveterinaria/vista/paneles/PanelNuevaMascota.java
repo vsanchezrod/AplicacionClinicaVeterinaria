@@ -184,12 +184,12 @@ public class PanelNuevaMascota extends JPanel {
 				}
 			
 				if (radioButtonGato.isSelected()) {
-					final Gato gatoNuevo = new Gato (campoNombreMascota.getText(), "1", genero, campoColor.getText());
+					final Gato gatoNuevo = new Gato (campoNombreMascota.getText(), ventanaPrincipalJFrame.generarCodigo(), genero, campoColor.getText());
 					clienteBuscado.addMascota(gatoNuevo);
 				}
 				
 				if (radioButtonPerro.isSelected()) {
-					final Perro perroNuevo = new Perro (campoNombreMascota.getText(), "2", genero, campoRaza.getText());
+					final Perro perroNuevo = new Perro (campoNombreMascota.getText(), ventanaPrincipalJFrame.generarCodigo(), genero, campoRaza.getText());
 					clienteBuscado.addMascota(perroNuevo);
 				}
 				
@@ -203,7 +203,7 @@ public class PanelNuevaMascota extends JPanel {
 						tipo = "ratón";
 					}					
 					
-					final Roedor roedorNuevo = new Roedor (campoNombreMascota.getText(), "3", genero, tipo);
+					final Roedor roedorNuevo = new Roedor (campoNombreMascota.getText(), ventanaPrincipalJFrame.generarCodigo(), genero, tipo);
 					clienteBuscado.addMascota(roedorNuevo);
 				}
 				

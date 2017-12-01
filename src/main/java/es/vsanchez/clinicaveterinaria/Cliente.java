@@ -56,7 +56,6 @@ public class Cliente {
 	}
 	
 	
-	// NO SE SI TENGO QUE HACER ESTO
 	public List<Mascota> getMascotas() {
 		return listaMascotas;
 	}

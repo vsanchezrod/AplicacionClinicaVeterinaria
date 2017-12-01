@@ -191,12 +191,12 @@ public class PanelRegistroCliente extends JPanel {
 					}
 				
 					if (radioButtonGato.isSelected()) {
-						final Gato gatoNuevo = new Gato (campoNombreMascota.getText(), "1", genero, campoColor.getText());
+						final Gato gatoNuevo = new Gato (campoNombreMascota.getText(), ventanaPrincipalJFrame.generarCodigo(), genero, campoColor.getText());
 						clienteNuevo.addMascota(gatoNuevo);
 					}
 					
 					if (radioButtonPerro.isSelected()) {
-						final Perro perroNuevo = new Perro (campoNombreMascota.getText(), "2", genero, campoRaza.getText());
+						final Perro perroNuevo = new Perro (campoNombreMascota.getText(), ventanaPrincipalJFrame.generarCodigo(), genero, campoRaza.getText());
 						clienteNuevo.addMascota(perroNuevo);
 					}
 					
@@ -210,7 +210,7 @@ public class PanelRegistroCliente extends JPanel {
 							tipo = "ratón";
 						}					
 						
-						final Roedor roedorNuevo = new Roedor (campoNombreMascota.getText(), "3", genero, tipo);
+						final Roedor roedorNuevo = new Roedor (campoNombreMascota.getText(), ventanaPrincipalJFrame.generarCodigo(), genero, tipo);
 						clienteNuevo.addMascota(roedorNuevo);
 					}
 					// AÑADO EL CLIENTE CON SU MASCOTA, AL ARRAYLIST DE CLIENTES

@@ -3,10 +3,10 @@ package es.vsanchez.clinicaveterinaria.vista;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 
 import es.vsanchez.clinicaveterinaria.Cliente;
 import es.vsanchez.clinicaveterinaria.vista.paneles.PanelBienvenida;
@@ -94,4 +94,11 @@ public class VentanaPrincipalJFrame extends JFrame {
 		System.out.println("No existe el cliente, REGISTREMOSLO!");
 		return false;
 	}
+	
+	public String generarCodigo() {
+		
+		Random aleatorio = new Random();
+		return String.valueOf(aleatorio.nextInt(5000));
+	}
+	
 }
