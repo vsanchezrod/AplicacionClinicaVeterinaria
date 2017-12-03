@@ -7,6 +7,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -23,6 +24,7 @@ public class PanelTratamiento extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private VentanaPrincipalJFrame ventanaPrincipalJFrame;
+	private Cliente clienteBuscado;
 	
 	public PanelTratamiento(VentanaPrincipalJFrame ventanaPrincipal) {
 		
@@ -160,10 +162,10 @@ public class PanelTratamiento extends JPanel {
 		// EVENTO EN EL BOTÓN BUSCAR - Buscará el DNI del Cliente introducido.
 		buttonBuscar.addActionListener(new ActionListener(){
 			public void actionPerformed (ActionEvent e){
-				Cliente clienteBuscado = ventanaPrincipalJFrame.buscarCliente(campoDNICliente.getText());
+				clienteBuscado = ventanaPrincipalJFrame.buscarCliente(campoDNICliente.getText());
 				
 				// Verifica si el cliente existe, y si es así le añade las mascotas al comboBox
-				verificarCliente(clienteBuscado, comboBoxMascotas, campoFecha, campoTratamiento, textAreaTratamiento);
+				verificarCliente(comboBoxMascotas, campoFecha, campoTratamiento, textAreaTratamiento);
 			
 			}
 		});
@@ -172,26 +174,24 @@ public class PanelTratamiento extends JPanel {
 			public void actionPerformed (ActionEvent e){
 						
 				// Tengo que coger el INDEX de la mascota seleccionada en el comboBox y añadirle un tratamiento
-				// Busco cliente, recupero índice de la lista de mascotas, y busco la mascota con ese indice en el arraylist de mascotas del cliente
-				Cliente clienteBuscado = ventanaPrincipalJFrame.buscarCliente(campoDNICliente.getText());
-				int posicionMascota = comboBoxMascotas.getSelectedIndex();
-				
-				// Uso método para buscar en el array de mascotas la mascota que pertenece a ese índice
-				Mascota mascotaBuscada = clienteBuscado.buscarMascota(posicionMascota, clienteBuscado.getMascotas());
-				
-				// Añado el tratamiento a la mascota
-				mascotaBuscada.addTratamiento(campoFecha.getText(),campoTratamiento.getText());
-				
-				// Muestro por consola el tratamiento
-				System.out.println("Tratamiento añadido a " + mascotaBuscada.getNombre() + " a fecha de: " + campoFecha.getText() 
-						+ " corresponde con un tratamiento de: " + campoTratamiento.getText() + ". Descripción del tratamiento: " 
-						+ textAreaTratamiento.getText());
-				
-				resetearCamposTratamiento(campoFecha, campoTratamiento, textAreaTratamiento);
-				
-				// VEO LOS TRATAMIENTOS DE ESA MASCOTA
-				mascotaBuscada.mostrarTratamientos();
-				
+				if(!verificarSiClienteBuscadoEsNulo()) {
+					int posicionMascota = comboBoxMascotas.getSelectedIndex();
+					
+					Mascota mascotaBuscada = clienteBuscado.getMascotas().get(posicionMascota);
+					
+					// Añado el tratamiento a la mascota
+					mascotaBuscada.addTratamiento(campoFecha.getText(),campoTratamiento.getText());
+					
+					// Muestro por consola el tratamiento
+					System.out.println("Tratamiento añadido a " + mascotaBuscada.getNombre() + " a fecha de: " + campoFecha.getText() 
+							+ " corresponde con un tratamiento de: " + campoTratamiento.getText() + ". Descripción del tratamiento: " 
+							+ textAreaTratamiento.getText());
+					
+					resetearCamposTratamiento(campoFecha, campoTratamiento, textAreaTratamiento);
+					
+					// VEO LOS TRATAMIENTOS DE ESA MASCOTA
+					mascotaBuscada.mostrarTratamientos();
+				}
 			}	
 		});
 					
@@ -199,7 +199,7 @@ public class PanelTratamiento extends JPanel {
 		
 	}
 	
-	private void verificarCliente(Cliente clienteBuscado, JComboBox<String> comboBoxMascotas, JTextField fecha, JTextField tratamiento, JTextArea areaTratamiento){
+	private void verificarCliente(JComboBox<String> comboBoxMascotas, JTextField fecha, JTextField tratamiento, JTextArea areaTratamiento){
 				
 		if (clienteBuscado == null) {
 			System.out.println("No existe cliente con ese DNI!");
@@ -207,18 +207,28 @@ public class PanelTratamiento extends JPanel {
 			deshabilitarTratamiento(fecha, tratamiento, areaTratamiento);
 		}
 		else {
-			addMascotasComboBox(clienteBuscado, comboBoxMascotas);
+			addMascotasComboBox(comboBoxMascotas);
 			habilitarTratamiento(fecha, tratamiento, areaTratamiento);
 		}
 	}
+	
+	private boolean verificarSiClienteBuscadoEsNulo() {
+		if(clienteBuscado == null) {
+			System.out.println("No existe cliente con ese DNI!");
+			return true;
+		}
+		else {
+			return false;
+		}
 		
-	private void addMascotasComboBox(Cliente clienteBuscado, JComboBox<String> comboBoxMascotas) {
+	}
+	
+	private void addMascotasComboBox(JComboBox<String> comboBoxMascotas) {
 		comboBoxMascotas.removeAllItems();
 		
-		for(int i = 0; i < clienteBuscado.getMascotas().size(); i++) {
-			
-			comboBoxMascotas.addItem(clienteBuscado.getMascotas().get(i).getNombre());
-			System.out.println("Mascota añadida: " + clienteBuscado.getMascotas().get(i).getNombre());
+		List<Mascota> listaMascota = clienteBuscado.getMascotas();
+		for(Mascota mascota : listaMascota) {
+			comboBoxMascotas.addItem(mascota.getNombre());
 		}
 	}
 	

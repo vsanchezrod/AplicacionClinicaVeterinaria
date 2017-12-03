@@ -23,6 +23,7 @@ public class PanelNuevaMascota extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private VentanaPrincipalJFrame ventanaPrincipalJFrame;
+	private Cliente clienteBuscado;
 		
 	public PanelNuevaMascota(VentanaPrincipalJFrame ventanaPrincipal) {
 
@@ -159,8 +160,8 @@ public class PanelNuevaMascota extends JPanel {
 		buttonBuscar.addActionListener(new ActionListener(){
 			public void actionPerformed (ActionEvent e){
 			
-				Cliente clienteBuscado = ventanaPrincipalJFrame.buscarCliente(campoDNICliente.getText());
-				verificarSiClienteEsNulo(clienteBuscado, etiquetaNombreCliente);	
+				clienteBuscado = ventanaPrincipalJFrame.buscarCliente(campoDNICliente.getText());
+				verificarSiClienteEsNulo(etiquetaNombreCliente);	
 			}
 		});
 		
@@ -171,44 +172,45 @@ public class PanelNuevaMascota extends JPanel {
 				// CAMBIARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR - COMO PUEDO USAR EL SETGENERO y SETTIPO????
 				// Método cliente
 				
-				Cliente clienteBuscado = ventanaPrincipalJFrame.buscarCliente(campoDNICliente.getText());
-				
-				String genero;
-				
-				if (radioButtonMacho.isSelected()) {
-					genero = "macho";
-				}
-				
-				else {
-					genero = "hembra";
-				}
-			
-				if (radioButtonGato.isSelected()) {
-					final Gato gatoNuevo = new Gato (campoNombreMascota.getText(), ventanaPrincipalJFrame.generarCodigo(), genero, campoColor.getText());
-					clienteBuscado.addMascota(gatoNuevo);
-				}
-				
-				if (radioButtonPerro.isSelected()) {
-					final Perro perroNuevo = new Perro (campoNombreMascota.getText(), ventanaPrincipalJFrame.generarCodigo(), genero, campoRaza.getText());
-					clienteBuscado.addMascota(perroNuevo);
-				}
-				
-				if (radioButtonRoedor.isSelected()) {
-					String tipo;
+				if (!verificarSiClienteEsNulo(etiquetaNombreCliente)) {
 					
-					if (radioButtonConejo.isSelected()) {
-						tipo = "conejo";
+					String genero;
+					
+					if (radioButtonMacho.isSelected()) {
+						genero = "macho";
 					}
-					else {
-						tipo = "ratón";
-					}					
 					
-					final Roedor roedorNuevo = new Roedor (campoNombreMascota.getText(), ventanaPrincipalJFrame.generarCodigo(), genero, tipo);
-					clienteBuscado.addMascota(roedorNuevo);
-				}
+					else {
+						genero = "hembra";
+					}
 				
-				System.out.println("Cliente: " + clienteBuscado);
-				reiniciarMascota(campoNombreMascota, campoColor, campoRaza);
+					if (radioButtonGato.isSelected()) {
+						final Gato gatoNuevo = new Gato (campoNombreMascota.getText(), ventanaPrincipalJFrame.generarCodigo(), genero, campoColor.getText());
+						clienteBuscado.addMascota(gatoNuevo);
+					}
+					
+					if (radioButtonPerro.isSelected()) {
+						final Perro perroNuevo = new Perro (campoNombreMascota.getText(), ventanaPrincipalJFrame.generarCodigo(), genero, campoRaza.getText());
+						clienteBuscado.addMascota(perroNuevo);
+					}
+					
+					if (radioButtonRoedor.isSelected()) {
+						String tipo;
+						
+						if (radioButtonConejo.isSelected()) {
+							tipo = "conejo";
+						}
+						else {
+							tipo = "ratón";
+						}					
+						
+						final Roedor roedorNuevo = new Roedor (campoNombreMascota.getText(), ventanaPrincipalJFrame.generarCodigo(), genero, tipo);
+						clienteBuscado.addMascota(roedorNuevo);
+					}
+					
+					System.out.println("Cliente: " + clienteBuscado);
+					reiniciarMascota(campoNombreMascota, campoColor, campoRaza);
+				}
 			}
 		});
 
@@ -250,13 +252,15 @@ public class PanelNuevaMascota extends JPanel {
 
 	}
 	
-	private void verificarSiClienteEsNulo(Cliente clienteBuscado, JLabel etiqueta){
+	private boolean verificarSiClienteEsNulo(JLabel etiqueta){
 		if (clienteBuscado == null) {
 			etiqueta.setText("No existe cliente con ese DNI!");
 			System.out.println("No existe cliente con ese DNI!");
+			return true;
 		}
 		else {
 			etiqueta.setText("Cliente: " + clienteBuscado.getNombre() + " DNI: " + clienteBuscado.getDni());
+			return false;
 		}
 	}
 	

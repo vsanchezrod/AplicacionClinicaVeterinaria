@@ -60,17 +60,16 @@ public class VentanaPrincipalJFrame extends JFrame {
 	
 	public void listarClientes() {
 		System.out.println("Listando clientes.......");
-		for (Cliente c: listaClientes) {
-			System.out.println(c.getNombre() + c.getDni() + c.getMascotas());
+		for (Cliente cliente: listaClientes) {
+			System.out.println(cliente.getNombre() + cliente.getDni() + cliente.getMascotas());
 		}
 	}
 	
 	public Cliente buscarCliente(String dni) {
 		System.out.println("Buscando cliente.........");
 		System.out.println("El DNI introducido es: " + dni);
-		for(int i = 0; i < listaClientes.size(); i++) {
-			Cliente cliente = listaClientes.get(i);
-			System.out.println("El cliente de la posición de la lista: " + i + " tiene un DNI: " + cliente.getDni());
+		
+		for (Cliente cliente : listaClientes) {
 			if (cliente.getDni().equals(dni)) {
 				System.out.println("Se ha encontrado el cliente con DNI: " + cliente.getDni());
 				return cliente;
@@ -83,8 +82,8 @@ public class VentanaPrincipalJFrame extends JFrame {
 
 	public boolean buscarSiExisteCliente(String dni) {
 		System.out.println("Buscando si el cliente ya existe");
-		for(int i = 0; i < listaClientes.size(); i++) {
-			Cliente cliente = listaClientes.get(i);
+		
+		for (Cliente cliente : listaClientes) {
 			if (cliente.getDni().equals(dni)) {
 				System.out.println("El cliente con DNI " + cliente.getDni() + " ya existe.");
 				return true;

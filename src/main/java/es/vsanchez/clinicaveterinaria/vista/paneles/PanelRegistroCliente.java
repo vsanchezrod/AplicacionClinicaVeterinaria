@@ -168,7 +168,7 @@ public class PanelRegistroCliente extends JPanel {
 			public void actionPerformed (ActionEvent e){
 				
 				// ¿¿¿COMPROBAR SI EL CLIENTE EXISTE???
-				boolean existeCliente = ventanaPrincipalJFrame.buscarSiExisteCliente(campoDNICliente.getText());
+				final boolean existeCliente = ventanaPrincipalJFrame.buscarSiExisteCliente(campoDNICliente.getText());
 				
 				if (existeCliente) {
 					System.out.println("ERROR! Ese cliente ya existe.");
