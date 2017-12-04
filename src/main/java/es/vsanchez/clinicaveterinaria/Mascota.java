@@ -53,7 +53,7 @@ public class Mascota {
 		return this.genero;
 	}
 	
-	// Meétodo toString que sobrescribe al método con el mismo nombre heredado de la clase Object
+	// Método toString que sobrescribe al método con el mismo nombre heredado de la clase Object
 	@Override
 	public String toString() {
 		return this.nombre + " con el código " + this.codigo + " es " + this.genero;

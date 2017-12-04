@@ -70,9 +70,7 @@ public class PanelRegistroCliente extends JPanel {
 		panelCentral.add(campoNombreCliente);
 		final JTextField campoDNICliente = new JTextField("DNI Cliente");
 		panelCentral.add(campoDNICliente);
-		// AÑADIDO PARA MOSTRAR CUANDO UN CLIENTE YA EXISTE ---------------- QUITAR SI NO LO IMPLEMENTO
-		final JLabel etiqueraErrorCliente = new JLabel();
-		panelCentral.add(etiqueraErrorCliente);                            
+		panelCentral.add(new JPanel());                          
 
 		/* Fila 3 */
 		final JTextField campoDireccionCliente = new JTextField("Dirección Cliente");
