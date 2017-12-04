@@ -55,45 +55,43 @@ public class VentanaPrincipalJFrame extends JFrame {
 	public void addCliente(Cliente cliente) {
 		listaClientes.add(cliente);
 		System.out.println("Un cliente ha sido añadido.");
-		listarClientes();
 	}
 	
-	public void listarClientes() {
-		System.out.println("Listando clientes.......");
+	// Método que muestra toda la lista de clientes por consola 
+	/*public void listarClientes() {
+		System.out.println("Listando clientes...");
 		for (Cliente cliente: listaClientes) {
 			System.out.println(cliente.getNombre() + cliente.getDni() + cliente.getMascotas());
 		}
-	}
+	}*/
 	
+	// Método que busca un cliente en el ArrayList de Clientes a través del DNI 
 	public Cliente buscarCliente(String dni) {
-		System.out.println("Buscando cliente.........");
-		System.out.println("El DNI introducido es: " + dni);
-		
+		System.out.println("Buscando cliente...");
+				
 		for (Cliente cliente : listaClientes) {
 			if (cliente.getDni().equals(dni)) {
-				System.out.println("Se ha encontrado el cliente con DNI: " + cliente.getDni());
+				System.out.println("Se ha encontrado el cliente: " + cliente.getNombre() + " con DNI: " + cliente.getDni());
 				return cliente;
 			}
 		}
 		
-		System.out.println("No ha encontrado el cliente con ese DNI!");
 		return null;
 	}
 
+	// Método que comprueba si el cliente con el DNI introducido ya existe
 	public boolean buscarSiExisteCliente(String dni) {
-		System.out.println("Buscando si el cliente ya existe");
-		
+				
 		for (Cliente cliente : listaClientes) {
 			if (cliente.getDni().equals(dni)) {
 				System.out.println("El cliente con DNI " + cliente.getDni() + " ya existe.");
 				return true;
 			}
 		}
-		
-		System.out.println("No existe el cliente, REGISTREMOSLO!");
 		return false;
 	}
 	
+	// Método que genera un código aleatorio a las mascotas
 	public String generarCodigo() {
 		
 		Random aleatorio = new Random();

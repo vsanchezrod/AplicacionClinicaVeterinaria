@@ -55,7 +55,7 @@ public class Cliente {
 		listaMascotas.add(mascota);
 	}
 	
-	
+	// Método que devuelve el arraylist que contiene las mascotas
 	public List<Mascota> getMascotas() {
 		return listaMascotas;
 	}

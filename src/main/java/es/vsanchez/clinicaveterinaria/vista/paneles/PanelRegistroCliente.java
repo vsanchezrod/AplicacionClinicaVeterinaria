@@ -163,11 +163,11 @@ public class PanelRegistroCliente extends JPanel {
 		grupoGenero.add(radioButtonHembra);
 		
 
-		
+		// Evento que ocurre cuando se presiona el botón añadir del panel
 		buttonInsertar.addActionListener(new ActionListener(){
 			public void actionPerformed (ActionEvent e){
 				
-				// ¿¿¿COMPROBAR SI EL CLIENTE EXISTE???
+				// Se comprueba si ya existe el cliente
 				final boolean existeCliente = ventanaPrincipalJFrame.buscarSiExisteCliente(campoDNICliente.getText());
 				
 				if (existeCliente) {
@@ -175,11 +175,10 @@ public class PanelRegistroCliente extends JPanel {
 				}
 				
 				else {
-					// CREAR CLIENTE
+					// CREA CLIENTE
 					final Cliente clienteNuevo = new Cliente(campoNombreCliente.getText(), campoDNICliente.getText());
 									
-					// CREAR MASCOTA Y SE LA AÑADO AL CLIENTE
-					// CAMBIARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR - COMO PUEDO USAR EL SETGENERO y SETTIPO????
+					// CREA MASCOTA Y SE LA AÑADE AL CLIENTE
 					String genero;
 					
 					if (radioButtonMacho.isSelected()) {
@@ -213,15 +212,17 @@ public class PanelRegistroCliente extends JPanel {
 						final Roedor roedorNuevo = new Roedor (campoNombreMascota.getText(), ventanaPrincipalJFrame.generarCodigo(), genero, tipo);
 						clienteNuevo.addMascota(roedorNuevo);
 					}
-					// AÑADO EL CLIENTE CON SU MASCOTA, AL ARRAYLIST DE CLIENTES
+					
 					ventanaPrincipalJFrame.addCliente(clienteNuevo);
 					System.out.println("Cliente: " + clienteNuevo);
 					
 				}
+				// Se reinicia el formulario para poder ser usado nuevamente
 				reiniciarFormulario(campoNombreCliente, campoDNICliente, campoDireccionCliente,campoNombreMascota, campoColor, campoRaza);
 			}
 		});
 
+		// Este actionlistener, controla los campos y botones que se pueden usar en función de la mascota elegida.
 		ActionListener tipoMascotaActionListener = new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
@@ -261,6 +262,7 @@ public class PanelRegistroCliente extends JPanel {
 		return panelCentral;
 	}
 	
+	// Método que reinicia el formulario de registro
 	private void reiniciarFormulario(JTextField nombre, JTextField dni, JTextField direccion, JTextField mascota, JTextField color, JTextField raza) {
 		
 		nombre.setText("Nombre Cliente");

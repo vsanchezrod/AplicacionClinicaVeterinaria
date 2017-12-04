@@ -156,7 +156,7 @@ public class PanelNuevaMascota extends JPanel {
 		grupoGenero.add(radioButtonHembra);
 		
 		
-		// EVENTO EN EL BOTÓN BUSCAR - Buscará el DNI del Cliente introducido.
+		// Evento en el botón buscar - Buscará el DNI del Cliente introducido.
 		buttonBuscar.addActionListener(new ActionListener(){
 			public void actionPerformed (ActionEvent e){
 			
@@ -165,13 +165,11 @@ public class PanelNuevaMascota extends JPanel {
 			}
 		});
 		
+		// Evento en insertar
 		buttonInsertar.addActionListener(new ActionListener(){
 			public void actionPerformed (ActionEvent e){
 											
-				// SI EL USUARIO EXISTE: ===> CREAR MASCOTA Y AÑADIRLA AL CLIENTE
-				// CAMBIARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR - COMO PUEDO USAR EL SETGENERO y SETTIPO????
-				// Método cliente
-				
+				// Si el cliente no es NULO se agregará la mascota				
 				if (!verificarSiClienteEsNulo(etiquetaNombreCliente)) {
 					
 					String genero;
@@ -209,11 +207,13 @@ public class PanelNuevaMascota extends JPanel {
 					}
 					
 					System.out.println("Cliente: " + clienteBuscado);
+					
+					// Método que reincia los campos de la mascota.
 					reiniciarMascota(campoNombreMascota, campoColor, campoRaza);
 				}
 			}
 		});
-
+		// Este actionlistener, controla los campos y botones que se pueden usar en función de la mascota elegida.
 		ActionListener tipoMascotaActionListener = new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
@@ -251,7 +251,7 @@ public class PanelNuevaMascota extends JPanel {
 		return panelCentral;
 
 	}
-	
+	// Método que verifica si el cliente es NULO o NO, y si no es nulo muestra que cliente es en el panel.
 	private boolean verificarSiClienteEsNulo(JLabel etiqueta){
 		if (clienteBuscado == null) {
 			etiqueta.setText("No existe cliente con ese DNI!");
@@ -264,6 +264,7 @@ public class PanelNuevaMascota extends JPanel {
 		}
 	}
 	
+	// Método que reinicia el formulario de mascotas
 	private void reiniciarMascota(JTextField mascota, JTextField color, JTextField raza) {
 		
 		mascota.setText("Nombre Mascota");
