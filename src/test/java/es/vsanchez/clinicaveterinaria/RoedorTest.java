@@ -36,6 +36,6 @@ public class RoedorTest {
 	@Test
 	public void debeVerificarToString() {
 		final Roedor roedor = new Roedor("Zelda", "003", "hembra", "conejo");
-		assertEquals("Zelda es un conejo", roedor.toString());
+		assertEquals("Zelda es un conejo de género hembra", roedor.toString());
 	}
 }

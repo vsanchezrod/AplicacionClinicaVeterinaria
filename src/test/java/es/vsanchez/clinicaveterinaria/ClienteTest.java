@@ -39,6 +39,7 @@ public class ClienteTest {
 	@Test
 	public void debeVerificarToString() {
 		final Cliente cliente = new Cliente("Vir", "123456789Z");
-		assertEquals("Vir con DNI 123456789Z.", cliente.toString());
+		assertEquals("Vir con DNI 123456789Z tiene las siguientes mascotas: [].", cliente.toString());
 	}
 }
+

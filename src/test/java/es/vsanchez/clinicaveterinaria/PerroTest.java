@@ -36,6 +36,6 @@ public class PerroTest {
 	@Test
 	public void debeVerificarToString() {
 		final Perro perro = new Perro("Bango", "001", "macho", "labrador");
-		assertEquals("Bango es un perro de raza labrador", perro.toString());
+		assertEquals("Bango es un perro de raza labrador de género macho", perro.toString());
 	}
 }

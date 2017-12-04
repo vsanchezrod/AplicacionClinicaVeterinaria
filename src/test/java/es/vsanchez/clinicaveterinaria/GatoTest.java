@@ -36,7 +36,7 @@ public class GatoTest {
 	@Test
 	public void debeVerificarToString() {
 		final Gato gato = new Gato("Manolo", "002", "macho","morado");
-		assertEquals("Manolo es un gato de color morado", gato.toString());
+		assertEquals("Manolo es un gato de color morado de género macho", gato.toString());
 	}
 	
 }
