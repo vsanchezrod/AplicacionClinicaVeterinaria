@@ -17,6 +17,7 @@ import es.vsanchez.clinicaveterinaria.modelo.Cliente;
 import es.vsanchez.clinicaveterinaria.modelo.Gato;
 import es.vsanchez.clinicaveterinaria.modelo.Perro;
 import es.vsanchez.clinicaveterinaria.modelo.Roedor;
+import es.vsanchez.clinicaveterinaria.modelo.excepciones.DniInvalidoException;
 import es.vsanchez.clinicaveterinaria.persistencia.ServicioClientes;
 import es.vsanchez.clinicaveterinaria.vista.VentanaPrincipalJFrame;
 
@@ -170,7 +171,7 @@ public class PanelRegistroCliente extends JPanel {
 			public void actionPerformed (ActionEvent e){
 				
 				// Se comprueba si ya existe el cliente
-				final boolean existeCliente = servicioClientes.buscarSiExisteCliente(campoDNICliente.getText());
+				final boolean existeCliente = servicioClientes.comprobarSiExisteClientePorDNI(campoDNICliente.getText());
 				
 				if (existeCliente) {
 					System.out.println("ERROR! Ese cliente ya existe.");
@@ -215,8 +216,15 @@ public class PanelRegistroCliente extends JPanel {
 						clienteNuevo.addMascota(roedorNuevo);
 					}
 					
-					servicioClientes.addCliente(clienteNuevo);
-					System.out.println("Cliente: " + clienteNuevo);
+					try {
+						servicioClientes.addCliente(clienteNuevo);
+						System.out.println("Cliente: " + clienteNuevo);
+					} catch (DniInvalidoException dniInvalidoException) {
+						dniInvalidoException.printStackTrace();
+						// Crear etiqueta para mostrar que es invalido el dni ((hacer el reset en el try))
+						// Crear metodo privado para resetear la etiqueta
+					}
+					
 					
 				}
 				// Se reinicia el formulario para poder ser usado nuevamente

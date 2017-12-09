@@ -162,7 +162,7 @@ public class PanelNuevaMascota extends JPanel {
 		buttonBuscar.addActionListener(new ActionListener(){
 			public void actionPerformed (ActionEvent e){
 			
-				clienteBuscado = servicioClientes.buscarCliente(campoDNICliente.getText());
+				clienteBuscado = servicioClientes.buscarClientePorDNI(campoDNICliente.getText());
 				verificarSiClienteEsNulo(etiquetaNombreCliente);	
 			}
 		});

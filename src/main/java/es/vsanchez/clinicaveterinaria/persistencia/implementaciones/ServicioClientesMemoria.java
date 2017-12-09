@@ -4,15 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import es.vsanchez.clinicaveterinaria.modelo.Cliente;
+import es.vsanchez.clinicaveterinaria.modelo.excepciones.DniInvalidoException;
 import es.vsanchez.clinicaveterinaria.persistencia.ServicioClientes;
 
-public class ServicioClientesMemoria implements ServicioClientes {
+public class ServicioClientesMemoria extends ServicioClientes {
 
 	private static final long serialVersionUID = 1L;
 	private List<Cliente> listaClientes = new ArrayList<Cliente>();
 
 	// Método para añadir un cliente nuevo al ArrayList de clientes
-	public void addCliente(Cliente cliente) {
+	public void addCliente(Cliente cliente) throws DniInvalidoException {
+		validarDni(cliente.getDni());
 		listaClientes.add(cliente);
 		System.out.println("Un cliente ha sido añadido.");
 	}
@@ -27,7 +29,7 @@ public class ServicioClientesMemoria implements ServicioClientes {
 	 */
 
 	// Método que busca un cliente en el ArrayList de Clientes a través del DNI
-	public Cliente buscarCliente(String dni) {
+	public Cliente buscarClientePorDNI(String dni) {
 		System.out.println("Buscando cliente...");
 
 		for (Cliente cliente : listaClientes) {
@@ -42,7 +44,7 @@ public class ServicioClientesMemoria implements ServicioClientes {
 	}
 
 	// Método que comprueba si el cliente con el DNI introducido ya existe
-	public boolean buscarSiExisteCliente(String dni) {
+	public boolean comprobarSiExisteClientePorDNI(String dni) {
 
 		for (Cliente cliente : listaClientes) {
 			if (cliente.getDni().equals(dni)) {

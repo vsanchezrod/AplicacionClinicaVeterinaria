@@ -163,7 +163,7 @@ public class PanelTratamiento extends JPanel {
 		// Evento del boton Buscar - Buscará el DNI del Cliente introducido.
 		buttonBuscar.addActionListener(new ActionListener(){
 			public void actionPerformed (ActionEvent e){
-				clienteBuscado = servicioClientes.buscarCliente(campoDNICliente.getText());
+				clienteBuscado = servicioClientes.buscarClientePorDNI(campoDNICliente.getText());
 				
 				// Verifica si el cliente existe, y si es así le añade sus mascotas al comboBox
 				verificarCliente(comboBoxMascotas, campoFecha, campoTratamiento, textAreaTratamiento);
