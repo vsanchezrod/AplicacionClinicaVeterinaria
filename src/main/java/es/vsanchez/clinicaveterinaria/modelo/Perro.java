@@ -1,4 +1,4 @@
-package es.vsanchez.clinicaveterinaria;
+package es.vsanchez.clinicaveterinaria.modelo;
 
 public class Perro extends Mascota{
 

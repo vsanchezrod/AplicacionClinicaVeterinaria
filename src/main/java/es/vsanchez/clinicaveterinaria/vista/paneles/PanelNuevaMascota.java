@@ -13,10 +13,11 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-import es.vsanchez.clinicaveterinaria.Cliente;
-import es.vsanchez.clinicaveterinaria.Gato;
-import es.vsanchez.clinicaveterinaria.Perro;
-import es.vsanchez.clinicaveterinaria.Roedor;
+import es.vsanchez.clinicaveterinaria.modelo.Cliente;
+import es.vsanchez.clinicaveterinaria.modelo.Gato;
+import es.vsanchez.clinicaveterinaria.modelo.Perro;
+import es.vsanchez.clinicaveterinaria.modelo.Roedor;
+import es.vsanchez.clinicaveterinaria.persistencia.ServicioClientes;
 import es.vsanchez.clinicaveterinaria.vista.VentanaPrincipalJFrame;
 
 public class PanelNuevaMascota extends JPanel {
@@ -24,11 +25,13 @@ public class PanelNuevaMascota extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private VentanaPrincipalJFrame ventanaPrincipalJFrame;
 	private Cliente clienteBuscado;
-		
+	private ServicioClientes servicioClientes;	
+	
 	public PanelNuevaMascota(VentanaPrincipalJFrame ventanaPrincipal) {
 
 		this.ventanaPrincipalJFrame = ventanaPrincipal;
-		
+		servicioClientes = ventanaPrincipal.getServicioClientes();
+
 		setLayout(new BorderLayout());
 
 		JPanel panelMargenSuperior = new JPanel();
@@ -49,7 +52,6 @@ public class PanelNuevaMascota extends JPanel {
 		JPanel panelMargenInferior = new JPanel();
 		panelMargenInferior.setPreferredSize(new Dimension(getWidth(), 100));
 		add(panelMargenInferior, BorderLayout.SOUTH);
-
 	}
 
 	private JPanel construirPanelCentral() {
@@ -160,7 +162,7 @@ public class PanelNuevaMascota extends JPanel {
 		buttonBuscar.addActionListener(new ActionListener(){
 			public void actionPerformed (ActionEvent e){
 			
-				clienteBuscado = ventanaPrincipalJFrame.buscarCliente(campoDNICliente.getText());
+				clienteBuscado = servicioClientes.buscarCliente(campoDNICliente.getText());
 				verificarSiClienteEsNulo(etiquetaNombreCliente);	
 			}
 		});

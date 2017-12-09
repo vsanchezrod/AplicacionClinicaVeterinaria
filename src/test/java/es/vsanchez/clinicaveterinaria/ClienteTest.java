@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import es.vsanchez.clinicaveterinaria.Cliente;
+import es.vsanchez.clinicaveterinaria.modelo.Cliente;
 
 public class ClienteTest {
 

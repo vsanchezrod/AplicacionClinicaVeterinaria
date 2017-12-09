@@ -13,20 +13,24 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-import es.vsanchez.clinicaveterinaria.Cliente;
-import es.vsanchez.clinicaveterinaria.Gato;
-import es.vsanchez.clinicaveterinaria.Perro;
-import es.vsanchez.clinicaveterinaria.Roedor;
+import es.vsanchez.clinicaveterinaria.modelo.Cliente;
+import es.vsanchez.clinicaveterinaria.modelo.Gato;
+import es.vsanchez.clinicaveterinaria.modelo.Perro;
+import es.vsanchez.clinicaveterinaria.modelo.Roedor;
+import es.vsanchez.clinicaveterinaria.persistencia.ServicioClientes;
 import es.vsanchez.clinicaveterinaria.vista.VentanaPrincipalJFrame;
 
 public class PanelRegistroCliente extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private VentanaPrincipalJFrame ventanaPrincipalJFrame;
+	private ServicioClientes servicioClientes;
 
 	public PanelRegistroCliente(VentanaPrincipalJFrame ventanaPrincipal) {
 		
 		this.ventanaPrincipalJFrame = ventanaPrincipal;
+		servicioClientes = ventanaPrincipal.getServicioClientes();
+		
 		// Layout BORDERLAYAOUT
 		setLayout(new BorderLayout());
 		
@@ -166,7 +170,7 @@ public class PanelRegistroCliente extends JPanel {
 			public void actionPerformed (ActionEvent e){
 				
 				// Se comprueba si ya existe el cliente
-				final boolean existeCliente = ventanaPrincipalJFrame.buscarSiExisteCliente(campoDNICliente.getText());
+				final boolean existeCliente = servicioClientes.buscarSiExisteCliente(campoDNICliente.getText());
 				
 				if (existeCliente) {
 					System.out.println("ERROR! Ese cliente ya existe.");
@@ -211,7 +215,7 @@ public class PanelRegistroCliente extends JPanel {
 						clienteNuevo.addMascota(roedorNuevo);
 					}
 					
-					ventanaPrincipalJFrame.addCliente(clienteNuevo);
+					servicioClientes.addCliente(clienteNuevo);
 					System.out.println("Cliente: " + clienteNuevo);
 					
 				}

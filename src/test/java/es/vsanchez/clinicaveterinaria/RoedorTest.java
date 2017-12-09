@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import es.vsanchez.clinicaveterinaria.Roedor;
+import es.vsanchez.clinicaveterinaria.modelo.Roedor;
 
 public class RoedorTest {
 

@@ -16,19 +16,20 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import es.vsanchez.clinicaveterinaria.Cliente;
-import es.vsanchez.clinicaveterinaria.Mascota;
+import es.vsanchez.clinicaveterinaria.modelo.Cliente;
+import es.vsanchez.clinicaveterinaria.modelo.Mascota;
+import es.vsanchez.clinicaveterinaria.persistencia.ServicioClientes;
 import es.vsanchez.clinicaveterinaria.vista.VentanaPrincipalJFrame;
 
 public class PanelTratamiento extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private VentanaPrincipalJFrame ventanaPrincipalJFrame;
+	private ServicioClientes servicioClientes;
 	private Cliente clienteBuscado;
 	
 	public PanelTratamiento(VentanaPrincipalJFrame ventanaPrincipal) {
 		
-		this.ventanaPrincipalJFrame = ventanaPrincipal;
+		servicioClientes = ventanaPrincipal.getServicioClientes();
 		
 		setLayout(new BorderLayout());
 
@@ -162,7 +163,7 @@ public class PanelTratamiento extends JPanel {
 		// Evento del boton Buscar - Buscará el DNI del Cliente introducido.
 		buttonBuscar.addActionListener(new ActionListener(){
 			public void actionPerformed (ActionEvent e){
-				clienteBuscado = ventanaPrincipalJFrame.buscarCliente(campoDNICliente.getText());
+				clienteBuscado = servicioClientes.buscarCliente(campoDNICliente.getText());
 				
 				// Verifica si el cliente existe, y si es así le añade sus mascotas al comboBox
 				verificarCliente(comboBoxMascotas, campoFecha, campoTratamiento, textAreaTratamiento);

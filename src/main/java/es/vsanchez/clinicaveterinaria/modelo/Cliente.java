@@ -1,4 +1,4 @@
-package es.vsanchez.clinicaveterinaria;
+package es.vsanchez.clinicaveterinaria.modelo;
 
 import java.util.ArrayList;
 import java.util.List;
