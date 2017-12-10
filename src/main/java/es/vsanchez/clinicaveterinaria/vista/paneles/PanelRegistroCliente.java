@@ -80,7 +80,8 @@ public class PanelRegistroCliente extends JPanel {
 		/* Fila 3 */
 		final JTextField campoDireccionCliente = new JTextField("Dirección Cliente");
 		panelCentral.add(campoDireccionCliente);
-		panelCentral.add(new JPanel());
+		final JLabel etiquetaValidacionDNI = new JLabel();
+		panelCentral.add(etiquetaValidacionDNI);
 		panelCentral.add(new JPanel());
 		
 		/* Fila 4 */
@@ -219,10 +220,10 @@ public class PanelRegistroCliente extends JPanel {
 					try {
 						servicioClientes.addCliente(clienteNuevo);
 						System.out.println("Cliente: " + clienteNuevo);
+						resetearEtiquetaDNI(etiquetaValidacionDNI);
 					} catch (DniInvalidoException dniInvalidoException) {
 						dniInvalidoException.printStackTrace();
-						// Crear etiqueta para mostrar que es invalido el dni ((hacer el reset en el try))
-						// Crear metodo privado para resetear la etiqueta
+						etiquetaValidacionDNI.setText("DNI inválido!");
 					}
 					
 					
@@ -282,7 +283,10 @@ public class PanelRegistroCliente extends JPanel {
 		color.setText("color");
 		raza.setText("raza");
 	}
-			
+
+	private void resetearEtiquetaDNI(JLabel etiquetaValidacionDNI) {
+		etiquetaValidacionDNI.setText("");
+	}
 }
 
 
