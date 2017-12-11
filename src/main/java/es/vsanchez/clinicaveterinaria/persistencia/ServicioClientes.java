@@ -15,15 +15,14 @@ public abstract class ServicioClientes implements Serializable{
 	// Método para añadir un cliente nuevo al ArrayList de clientes
 	public abstract void addCliente (Cliente cliente) throws DniInvalidoException, IOException; 
 	
-	// Método que busca un cliente en el ArrayList de Clientes a través del DNI 
-	public abstract Cliente buscarClientePorDNI(String dni);
-		
-	// Método que comprueba si el cliente con el DNI introducido ya existe
-	public abstract boolean comprobarSiExisteClientePorDNI(String dni);
-
 	// Método que muestra toda la lista de clientes por consola 
 	public abstract void listarClientes() throws IOException;
 	
+	// Método que busca un cliente en el ArrayList de Clientes a través del DNI 
+	public abstract Cliente buscarClientePorDNI(String dni);
+			
+	// Método que comprueba si el cliente con el DNI introducido ya existe
+	public abstract boolean comprobarSiExisteClientePorDNI(String dni);
 	
 	
 	protected void validarDni(String dni) throws DniInvalidoException {

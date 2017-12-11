@@ -32,7 +32,7 @@ public class ServicioClientesMemoria extends ServicioClientes {
 		System.out.println("Buscando cliente...");
 
 		for (Cliente cliente : listaClientes) {
-			if (cliente.getDni().equals(dni)) {
+			if (cliente.getDni().equalsIgnoreCase(dni)) {
 				System.out.println(
 						"Se ha encontrado el cliente: " + cliente.getNombre() + " con DNI: " + cliente.getDni());
 				return cliente;

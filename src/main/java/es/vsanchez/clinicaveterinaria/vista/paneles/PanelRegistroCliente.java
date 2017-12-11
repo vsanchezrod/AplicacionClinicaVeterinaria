@@ -222,8 +222,7 @@ public class PanelRegistroCliente extends JPanel {
 						try {
 							servicioClientes.addCliente(clienteNuevo);
 						} catch (IOException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
+							System.out.println("El ArrayList<Cliente> no ha podido ser guardado en el fichero");;
 						}
 						System.out.println("Cliente: " + clienteNuevo);
 						resetearEtiquetaDNI(etiquetaValidacionDNI);

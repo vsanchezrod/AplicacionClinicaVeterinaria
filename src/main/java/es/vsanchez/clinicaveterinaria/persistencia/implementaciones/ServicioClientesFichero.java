@@ -29,7 +29,7 @@ public class ServicioClientesFichero extends ServicioClientes{
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void recuperarArrayListDeFichero() throws IOException {
+	private void recuperarArrayListDeFichero() throws IOException {
 		
 		// Se crea flujo de entrada de datos
 		ObjectInputStream recuperandoFichero = new ObjectInputStream(new FileInputStream ("listaClientes.txt"));
@@ -54,7 +54,7 @@ public class ServicioClientesFichero extends ServicioClientes{
 		System.out.println("Buscando cliente...");
 
 		for (Cliente cliente : listaClientes) {
-			if (cliente.getDni().equals(dni)) {
+			if (cliente.getDni().equalsIgnoreCase(dni)) {
 				System.out.println(
 						"Se ha encontrado el cliente: " + cliente.getNombre() + " con DNI: " + cliente.getDni());
 				return cliente;
