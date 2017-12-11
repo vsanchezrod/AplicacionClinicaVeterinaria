@@ -20,14 +20,13 @@ public class ServicioClientesMemoria extends ServicioClientes {
 	}
 
 	// Método que muestra toda la lista de clientes por consola
-	/*
-	 public void listarClientes() { System.out.println("Listando clientes...");
+	 public void listarClientes() { 
+		 System.out.println("Listando clientes...");
 		 for (Cliente cliente: listaClientes) { 
-		 	System.out.println(cliente.getNombre() + cliente.getDni() + cliente.getMascotas()); 
+			 System.out.println("Nombre del cliente: " + cliente.getNombre() + ". DNI: " + cliente.getDni() + ". Mascotas: " + cliente.getMascotas()); 
 		 }
 	 }
-	 */
-
+	
 	// Método que busca un cliente en el ArrayList de Clientes a través del DNI
 	public Cliente buscarClientePorDNI(String dni) {
 		System.out.println("Buscando cliente...");

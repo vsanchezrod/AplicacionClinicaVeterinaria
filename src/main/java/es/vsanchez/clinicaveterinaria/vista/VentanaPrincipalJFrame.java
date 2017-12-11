@@ -1,13 +1,14 @@
 package es.vsanchez.clinicaveterinaria.vista;
 
 import java.awt.BorderLayout;
+import java.io.IOException;
 import java.util.Random;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import es.vsanchez.clinicaveterinaria.persistencia.ServicioClientes;
-import es.vsanchez.clinicaveterinaria.persistencia.implementaciones.ServicioClientesMemoria;
+import es.vsanchez.clinicaveterinaria.persistencia.implementaciones.ServicioClientesFichero;
 import es.vsanchez.clinicaveterinaria.vista.paneles.PanelBienvenida;
 
 public class VentanaPrincipalJFrame extends JFrame {
@@ -28,8 +29,13 @@ public class VentanaPrincipalJFrame extends JFrame {
 		add(panelPrincipal, BorderLayout.CENTER);
 		setVisible(true);
 		
-		// Creamos un objeto de la clase ServicioClientesMemoria
-		servicioClientes = new ServicioClientesMemoria();
+		// Creamos un objeto de la clase ServicioClientesFichero
+		servicioClientes = new ServicioClientesFichero();
+		try {
+			servicioClientes.listarClientes();
+		} catch (IOException e) {
+			System.out.println("Aun no existe fichero. Añade datos para que se cree el fichero.");
+		}
 	}
 
 	// Método que setea el panel que se va a mostrar en el JFrame

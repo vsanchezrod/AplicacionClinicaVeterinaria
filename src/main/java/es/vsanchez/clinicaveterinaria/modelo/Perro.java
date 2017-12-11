@@ -1,7 +1,11 @@
 package es.vsanchez.clinicaveterinaria.modelo;
 
-public class Perro extends Mascota{
+import java.io.Serializable;
 
+public class Perro extends Mascota implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	
 	private String raza;
 	
 	// Constructor vacío

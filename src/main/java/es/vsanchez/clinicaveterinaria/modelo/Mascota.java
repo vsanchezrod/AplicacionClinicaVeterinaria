@@ -1,10 +1,13 @@
 package es.vsanchez.clinicaveterinaria.modelo;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Mascota {
+public class Mascota implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	// Se declaran los atributos de clase encapsulados con private
 	private String nombre;
 	private String codigo;

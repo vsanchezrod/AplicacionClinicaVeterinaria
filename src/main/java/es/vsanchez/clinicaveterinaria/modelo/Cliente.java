@@ -1,10 +1,13 @@
 package es.vsanchez.clinicaveterinaria.modelo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Cliente {
+public class Cliente implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	// Se declaran los atributos de clase encapsulados con private
 	private String nombre;
 	private String dni;
