@@ -173,7 +173,7 @@ public class PanelRegistroCliente extends JPanel {
 			public void actionPerformed (ActionEvent e){
 				
 				// Se comprueba si ya existe el cliente
-				final boolean existeCliente = servicioClientes.comprobarSiExisteClientePorDNI(campoDNICliente.getText());
+				final boolean existeCliente = servicioClientes.comprobarSiExisteClientePorDNI(campoDNICliente.getText().toUpperCase());
 				
 				if (existeCliente) {
 					System.out.println("ERROR! Ese cliente ya existe.");
@@ -181,7 +181,7 @@ public class PanelRegistroCliente extends JPanel {
 				
 				else {
 					// CREA CLIENTE
-					final Cliente clienteNuevo = new Cliente(campoNombreCliente.getText(), campoDNICliente.getText());
+					final Cliente clienteNuevo = new Cliente(campoNombreCliente.getText(), campoDNICliente.getText().toUpperCase());
 									
 					// CREA MASCOTA Y SE LA AÑADE AL CLIENTE
 					String genero;

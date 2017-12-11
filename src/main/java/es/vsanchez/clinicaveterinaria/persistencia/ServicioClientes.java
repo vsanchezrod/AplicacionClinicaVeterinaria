@@ -26,33 +26,41 @@ public abstract class ServicioClientes implements Serializable{
 	
 	
 	protected void validarDni(String dni) throws DniInvalidoException {
-		// Constante de tipo String que tiene las posibles letras que puede tener un DNI
-		final String LETRA_DNI = "TRWAGMYFPDXBNJZSQVHLCKE";
-		final int NUMERO_DE_LETRAS_POSIBLES = 23;
 		
-		// VALIDACIÓN DEL FORMATO DEL DNI
+		String numeroDniCadena = dni.substring(0, dni.length()-1);
+		char letraDni = dni.toUpperCase().charAt(dni.length()-1);
 		
+		validarFormatoDNI(dni, letraDni, numeroDniCadena);
+		int numeroDni = Integer.parseInt(numeroDniCadena);
+		validarLetraDNI(dni, letraDni, numeroDni);
+				
+	}
+		
+	private void validarFormatoDNI(String dni, char letraDni, String numeroDniCadena) throws DniInvalidoException {
 		// 1. Validamos que tenga un formato con 9 caracteres (8 numeros + 1 letra)
 		if (dni.length() != 9) {
 			throw new DniInvalidoException(DniInvalidoException.DNI_LONGITUD_INCORRECTA);
 		}
 		
 		// 2. Validamos la parte numérica
-		int numeroDni;
-		
 		try {
-			numeroDni = Integer.parseInt(dni.substring(0, dni.length()-1));
+			int numeroDni = Integer.parseInt(numeroDniCadena);
 		} catch (Exception e) {
 			throw new DniInvalidoException(DniInvalidoException.DNI_NUMERICO_INCORRECTO);
 		}
-		
+	
 		// 3. El último caracter tiene que ser una letra
-		char letraDni = dni.toUpperCase().charAt(dni.length()-1);
 		if (!Character.isLetter(letraDni)) {
 			throw new DniInvalidoException(DniInvalidoException.DNI_LETRA_INCORRECTA);
 		}
-				
-		// VALIDACIÓN: NUMERO INTRODUCIDO CORRESPONDE CON LA LETRA INTRODUCIDA
+	}
+	
+	private void validarLetraDNI(String dni, char letraDni, int numeroDni) throws DniInvalidoException {
+		
+		// Constante de tipo String que tiene las posibles letras que puede tener un DNI
+		final String LETRA_DNI = "TRWAGMYFPDXBNJZSQVHLCKE";
+		final int NUMERO_DE_LETRAS_POSIBLES = 23;
+		
 		int resto = numeroDni % NUMERO_DE_LETRAS_POSIBLES;
 		char letraValida = LETRA_DNI.charAt(resto);
 		
@@ -60,5 +68,5 @@ public abstract class ServicioClientes implements Serializable{
 			throw new DniInvalidoException("DNI '" + dni + "' no es válido.");
 		}
 	}
-		
+	
 }
