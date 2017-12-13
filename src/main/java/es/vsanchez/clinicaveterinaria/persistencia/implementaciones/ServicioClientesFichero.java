@@ -18,28 +18,15 @@ public class ServicioClientesFichero extends ServicioClientes{
 	
 	private static final long serialVersionUID = 1L;
 	private List<Cliente> listaClientes = new ArrayList<Cliente>();
+	private static final String NOMBRE_FICHERO = "listaClientes.dat";
 	
-	
-	private void escribirArrayListEnFichero() throws IOException {
-		
-		// Se construye un flujo de salida de datos
-		ObjectOutputStream escribiendoFichero = new ObjectOutputStream(new FileOutputStream ("listaClientes.txt"));
-		escribiendoFichero.writeObject(listaClientes);
-		escribiendoFichero.close();
-	}
-	
-	@SuppressWarnings("unchecked")
-	private void recuperarArrayListDeFichero() throws IOException {
-		
-		// Se crea flujo de entrada de datos
-		ObjectInputStream recuperandoFichero = new ObjectInputStream(new FileInputStream ("listaClientes.txt"));
+	public ServicioClientesFichero() {
 		try {
-			listaClientes = (ArrayList<Cliente>) recuperandoFichero.readObject();
-		} catch (ClassNotFoundException e) {
-			System.out.println("El fichero no ha sido encontrado.");
+			recuperarListaClientesDeFichero();
+		} catch (IOException e) {
+			System.out.println("No se ha podido recuperar la lista de clientes.");
 			e.printStackTrace();
 		}
-		recuperandoFichero.close();
 	}
 	
 	public void addCliente(Cliente cliente) throws DniInvalidoException, IOException {
@@ -47,7 +34,7 @@ public class ServicioClientesFichero extends ServicioClientes{
 		listaClientes.add(cliente);
 		System.out.println("Un cliente ha sido añadido.");
 		System.out.println("Añadiendo cliente a fichero...");
-		escribirArrayListEnFichero();
+		escribirListaClientesEnFichero();
 	}
 
 	public Cliente buscarClientePorDNI(String dni) {
@@ -55,12 +42,10 @@ public class ServicioClientesFichero extends ServicioClientes{
 
 		for (Cliente cliente : listaClientes) {
 			if (cliente.getDni().equalsIgnoreCase(dni)) {
-				System.out.println(
-						"Se ha encontrado el cliente: " + cliente.getNombre() + " con DNI: " + cliente.getDni());
+				System.out.println("Se ha encontrado el cliente: " + cliente.getNombre() + " con DNI: " + cliente.getDni());
 				return cliente;
 			}
 		}
-
 		return null;
 	}
 
@@ -76,7 +61,7 @@ public class ServicioClientesFichero extends ServicioClientes{
 
 	public void listarClientes() throws IOException {
 		listaClientes = new ArrayList<Cliente>();
-		recuperarArrayListDeFichero();
+		recuperarListaClientesDeFichero();
 		System.out.println("Recuperando lista de clientes del fichero...");
 		System.out.println("Listando clientes...");
 		for (Cliente cliente: listaClientes) { 
@@ -84,4 +69,25 @@ public class ServicioClientesFichero extends ServicioClientes{
 		}
 	}
 	
+	private void escribirListaClientesEnFichero() throws IOException {
+		
+		// Se construye un flujo de salida de datos
+		ObjectOutputStream escribiendoFichero = new ObjectOutputStream(new FileOutputStream (NOMBRE_FICHERO));
+		escribiendoFichero.writeObject(listaClientes);
+		escribiendoFichero.close();
+	}
+	
+	@SuppressWarnings("unchecked")
+	private void recuperarListaClientesDeFichero() throws IOException {       
+		
+		// Se crea flujo de entrada de datos
+		ObjectInputStream recuperandoFichero = new ObjectInputStream(new FileInputStream (NOMBRE_FICHERO));
+		try {
+			listaClientes = (List<Cliente>) recuperandoFichero.readObject();
+		} catch (ClassNotFoundException e) {
+			System.out.println("El fichero no ha sido encontrado.");
+			e.printStackTrace();
+		}
+		recuperandoFichero.close();
+	}
 }

@@ -44,7 +44,7 @@ public abstract class ServicioClientes implements Serializable{
 		
 		// 2. Validamos la parte numérica
 		try {
-			int numeroDni = Integer.parseInt(numeroDniCadena);
+			Integer.parseInt(numeroDniCadena);
 		} catch (Exception e) {
 			throw new DniInvalidoException(DniInvalidoException.DNI_NUMERICO_INCORRECTO);
 		}

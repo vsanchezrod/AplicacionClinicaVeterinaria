@@ -1,7 +1,6 @@
 package es.vsanchez.clinicaveterinaria.vista;
 
 import java.awt.BorderLayout;
-import java.io.IOException;
 import java.util.Random;
 
 import javax.swing.JFrame;
@@ -31,11 +30,6 @@ public class VentanaPrincipalJFrame extends JFrame {
 		
 		// Creamos un objeto de la clase ServicioClientesFichero
 		servicioClientes = new ServicioClientesFichero();
-		try {
-			servicioClientes.listarClientes();
-		} catch (IOException e) {
-			System.out.println("Aun no existe fichero. Añade datos para que se cree el fichero.");
-		}
 	}
 
 	// Método que setea el panel que se va a mostrar en el JFrame
