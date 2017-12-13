@@ -37,7 +37,7 @@ public class ServicioClientesFichero extends ServicioClientes{
 		escribirListaClientesEnFichero();
 	}
 
-	public Cliente buscarClientePorDNI(String dni) {
+	/*public Cliente buscarClientePorDNI(String dni) {
 		System.out.println("Buscando cliente...");
 
 		for (Cliente cliente : listaClientes) {
@@ -57,7 +57,7 @@ public class ServicioClientesFichero extends ServicioClientes{
 			}
 		}
 		return false;
-	}
+	}*/
 
 	public void listarClientes() throws IOException {
 		listaClientes = new ArrayList<Cliente>();

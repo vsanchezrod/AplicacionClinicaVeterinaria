@@ -28,7 +28,7 @@ public class ServicioClientesMemoria extends ServicioClientes {
 	 }
 	
 	// Método que busca un cliente en el ArrayList de Clientes a través del DNI
-	public Cliente buscarClientePorDNI(String dni) {
+	/*public Cliente buscarClientePorDNI(String dni) {
 		System.out.println("Buscando cliente...");
 
 		for (Cliente cliente : listaClientes) {
@@ -52,5 +52,5 @@ public class ServicioClientesMemoria extends ServicioClientes {
 			}
 		}
 		return false;
-	}
+	}*/
 }

@@ -2,6 +2,7 @@ package es.vsanchez.clinicaveterinaria.persistencia;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.List;
 
 import es.vsanchez.clinicaveterinaria.modelo.Cliente;
 import es.vsanchez.clinicaveterinaria.modelo.excepciones.DniInvalidoException;
@@ -9,20 +10,46 @@ import es.vsanchez.clinicaveterinaria.modelo.excepciones.DniInvalidoException;
 public abstract class ServicioClientes implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-
+	private List<Cliente> listaClientes;
+	
 	// Creo una interfaz que hereda de otra interfaz Serializable (que será implementada por las clases que implementen de ServicioClientes)
 	
 	// Método para añadir un cliente nuevo al ArrayList de clientes
 	public abstract void addCliente (Cliente cliente) throws DniInvalidoException, IOException; 
 	
 	// Método que muestra toda la lista de clientes por consola 
-	public abstract void listarClientes() throws IOException;
+	/////////////////7public abstract void listarClientes() throws IOException;
 	
+	//////////////////////////////////////////////////
+	public List<Cliente> getListaClientes(){
+		return this.listaClientes;
+	}
+		
 	// Método que busca un cliente en el ArrayList de Clientes a través del DNI 
-	public abstract Cliente buscarClientePorDNI(String dni);
+	public Cliente buscarClientePorDNI(String dni) {
+		System.out.println("Buscando cliente...");
+
+		for (Cliente cliente : listaClientes) {
+			if (cliente.getDni().equalsIgnoreCase(dni)) {
+				System.out.println(
+						"Se ha encontrado el cliente: " + cliente.getNombre() + " con DNI: " + cliente.getDni());
+				return cliente;
+			}
+		}
+
+		return null;
+	}
 			
 	// Método que comprueba si el cliente con el DNI introducido ya existe
-	public abstract boolean comprobarSiExisteClientePorDNI(String dni);
+	public boolean comprobarSiExisteClientePorDNI(String dni) {
+		for (Cliente cliente : listaClientes) {
+			if (cliente.getDni().equals(dni)) {
+				System.out.println("El cliente con DNI " + cliente.getDni() + " ya existe.");
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	
 	protected void validarDni(String dni) throws DniInvalidoException {
