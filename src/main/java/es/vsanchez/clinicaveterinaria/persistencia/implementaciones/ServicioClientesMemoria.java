@@ -18,11 +18,4 @@ public class ServicioClientesMemoria extends ServicioClientes {
 		System.out.println("Un cliente ha sido añadido.");
 	}
 
-	// Método que muestra toda la lista de clientes por consola
-	 public void mostrarClientesPorConsola() { 
-		 System.out.println("Listando clientes...");
-		 for (Cliente cliente: listaClientes) { 
-			 System.out.println("Nombre del cliente: " + cliente.getNombre() + ". DNI: " + cliente.getDni() + ". Mascotas: " + cliente.getMascotas()); 
-		 }
-	 }
 }

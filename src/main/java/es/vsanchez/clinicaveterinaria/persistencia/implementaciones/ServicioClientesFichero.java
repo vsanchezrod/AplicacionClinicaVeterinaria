@@ -55,7 +55,9 @@ public class ServicioClientesFichero extends ServicioClientes{
 		
 		// Se crea flujo de entrada de datos
 		try {
-			ObjectInputStream recuperandoFichero = new ObjectInputStream(new FileInputStream (NOMBRE_FICHERO));
+			System.out.println("Recuperando lista de clientes de fichero..."); /////////////////////////////////////
+			mostrarClientesPorConsola(); //////////////////////////////////////////////////////////////////////////////////
+			ObjectInputStream recuperandoFichero = new ObjectInputStream(new FileInputStream (NOMBRE_FICHERO)); 
 			listaClientes = (List<Cliente>) recuperandoFichero.readObject();
 			recuperandoFichero.close();
 		} catch (FileNotFoundException exception) {
