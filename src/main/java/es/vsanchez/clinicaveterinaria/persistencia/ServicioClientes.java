@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import es.vsanchez.clinicaveterinaria.modelo.Cliente;
+import es.vsanchez.clinicaveterinaria.modelo.Mascota;
 import es.vsanchez.clinicaveterinaria.modelo.excepciones.DniInvalidoException;
 
 public abstract class ServicioClientes implements Serializable{
@@ -16,7 +17,11 @@ public abstract class ServicioClientes implements Serializable{
 	// Se crea una clase Abstracta implementa la interfaz Serializable
 	
 	// Método para añadir un cliente nuevo al ArrayList de clientes
-	public abstract void addCliente (Cliente cliente) throws DniInvalidoException, IOException; 
+	public abstract void addCliente(Cliente cliente) throws DniInvalidoException, IOException; 
+	
+	public abstract void addMascotaAlCliente(Cliente clienteModificado, Mascota mascotaNueva) throws DniInvalidoException, IOException;
+	
+	public abstract void addTratamientoAMascota(Mascota mascota, String fechaTratamiento, String nombreTratamiento) throws DniInvalidoException, IOException;
 	
 	// Método que muestra toda la lista de clientes por consola 
 	public void mostrarClientesPorConsola(){

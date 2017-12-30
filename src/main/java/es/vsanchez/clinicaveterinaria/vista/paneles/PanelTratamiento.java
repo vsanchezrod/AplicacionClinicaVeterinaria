@@ -7,6 +7,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -18,6 +19,7 @@ import javax.swing.JTextField;
 
 import es.vsanchez.clinicaveterinaria.modelo.Cliente;
 import es.vsanchez.clinicaveterinaria.modelo.Mascota;
+import es.vsanchez.clinicaveterinaria.modelo.excepciones.DniInvalidoException;
 import es.vsanchez.clinicaveterinaria.persistencia.ServicioClientes;
 import es.vsanchez.clinicaveterinaria.vista.VentanaPrincipalJFrame;
 
@@ -193,8 +195,18 @@ public class PanelTratamiento extends JPanel {
 					
 					// Método que muestra todos los tratamientos de la mascota seleccionada
 					mascotaBuscada.mostrarTratamientos();
+					try {
+						servicioClientes.addTratamientoAMascota(mascotaBuscada, campoFecha.getText(), campoTratamiento.getText());
+					} catch (DniInvalidoException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
-			}	
+			}
+					
 		});
 					
 		return panelCentral; 

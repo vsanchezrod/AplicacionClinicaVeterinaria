@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import es.vsanchez.clinicaveterinaria.persistencia.ServicioClientes;
+import es.vsanchez.clinicaveterinaria.persistencia.implementaciones.ServicioClientesBaseDeDatos;
 import es.vsanchez.clinicaveterinaria.persistencia.implementaciones.ServicioClientesFichero;
 import es.vsanchez.clinicaveterinaria.vista.paneles.PanelBienvenida;
 
@@ -29,7 +30,7 @@ public class VentanaPrincipalJFrame extends JFrame {
 		setVisible(true);
 		
 		// Creamos un objeto de la clase ServicioClientesFichero
-		servicioClientes = new ServicioClientesFichero();
+		servicioClientes = new ServicioClientesBaseDeDatos();
 	}
 
 	// Método que setea el panel que se va a mostrar en el JFrame

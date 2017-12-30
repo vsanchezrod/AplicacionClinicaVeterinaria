@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -15,8 +16,10 @@ import javax.swing.JTextField;
 
 import es.vsanchez.clinicaveterinaria.modelo.Cliente;
 import es.vsanchez.clinicaveterinaria.modelo.Gato;
+import es.vsanchez.clinicaveterinaria.modelo.Mascota;
 import es.vsanchez.clinicaveterinaria.modelo.Perro;
 import es.vsanchez.clinicaveterinaria.modelo.Roedor;
+import es.vsanchez.clinicaveterinaria.modelo.excepciones.DniInvalidoException;
 import es.vsanchez.clinicaveterinaria.persistencia.ServicioClientes;
 import es.vsanchez.clinicaveterinaria.vista.VentanaPrincipalJFrame;
 
@@ -174,7 +177,8 @@ public class PanelNuevaMascota extends JPanel {
 				// Si el cliente no es NULO se agregará la mascota				
 				if (!verificarSiClienteEsNulo(etiquetaNombreCliente)) {
 					
-					String genero;
+					final String genero;
+					Mascota nuevaMascota = null;
 					
 					if (radioButtonMacho.isSelected()) {
 						genero = "macho";
@@ -185,13 +189,13 @@ public class PanelNuevaMascota extends JPanel {
 					}
 				
 					if (radioButtonGato.isSelected()) {
-						final Gato gatoNuevo = new Gato (campoNombreMascota.getText(), ventanaPrincipalJFrame.generarCodigo(), genero, campoColor.getText());
-						clienteBuscado.addMascota(gatoNuevo);
+						nuevaMascota = new Gato (campoNombreMascota.getText(), ventanaPrincipalJFrame.generarCodigo(), genero, campoColor.getText());
+						clienteBuscado.addMascota(nuevaMascota);
 					}
 					
 					if (radioButtonPerro.isSelected()) {
-						final Perro perroNuevo = new Perro (campoNombreMascota.getText(), ventanaPrincipalJFrame.generarCodigo(), genero, campoRaza.getText());
-						clienteBuscado.addMascota(perroNuevo);
+						nuevaMascota = new Perro (campoNombreMascota.getText(), ventanaPrincipalJFrame.generarCodigo(), genero, campoRaza.getText());
+						clienteBuscado.addMascota(nuevaMascota);
 					}
 					
 					if (radioButtonRoedor.isSelected()) {
@@ -204,8 +208,18 @@ public class PanelNuevaMascota extends JPanel {
 							tipo = "ratón";
 						}					
 						
-						final Roedor roedorNuevo = new Roedor (campoNombreMascota.getText(), ventanaPrincipalJFrame.generarCodigo(), genero, tipo);
-						clienteBuscado.addMascota(roedorNuevo);
+						nuevaMascota = new Roedor (campoNombreMascota.getText(), ventanaPrincipalJFrame.generarCodigo(), genero, tipo);
+						clienteBuscado.addMascota(nuevaMascota);
+					}
+					// TODO:
+					try {
+						servicioClientes.addMascotaAlCliente(clienteBuscado, nuevaMascota);
+					} catch (DniInvalidoException dniInvalido) {
+						// TODO Auto-generated catch block
+						dniInvalido.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
 					}
 					
 					System.out.println("Cliente: " + clienteBuscado);
