@@ -178,6 +178,7 @@ public class PanelRegistroCliente extends JPanel {
 				if (existeCliente) {
 					System.out.println("ERROR! Ese cliente ya existe.");
 					etiquetaValidacionDNI.setText("El cliente ya existe!");
+					reiniciarFormulario(campoNombreCliente, campoDNICliente, campoDireccionCliente, campoNombreMascota, campoColor, campoRaza);
 				}
 				
 				else {
@@ -219,17 +220,19 @@ public class PanelRegistroCliente extends JPanel {
 						clienteNuevo.addMascota(roedorNuevo);
 					}
 					
+					// Añadimos el cliente, utilizando excepciones
 					try {
 						try {
 							servicioClientes.addCliente(clienteNuevo);
 							// Se reinicia el formulario para poder ser usado nuevamente
 							reiniciarFormulario(campoNombreCliente, campoDNICliente, campoDireccionCliente,campoNombreMascota, campoColor, campoRaza);
 						} catch (IOException e1) {
-							System.out.println("El ArrayList<Cliente> no ha podido ser guardado en el fichero");
+							System.out.println("La lista de clientes no ha podido ser guardada en el fichero");
 							reiniciarCampoDni(campoDNICliente);
 						}
 						System.out.println("Cliente: " + clienteNuevo);
 						resetearEtiquetaDNI(etiquetaValidacionDNI);
+					
 					} catch (DniInvalidoException dniInvalidoException) {
 						dniInvalidoException.printStackTrace();
 						etiquetaValidacionDNI.setText("DNI inválido!");
