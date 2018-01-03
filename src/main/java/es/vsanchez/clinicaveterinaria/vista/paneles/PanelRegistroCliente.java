@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 
 import es.vsanchez.clinicaveterinaria.modelo.Cliente;
 import es.vsanchez.clinicaveterinaria.modelo.Gato;
+import es.vsanchez.clinicaveterinaria.modelo.Mascota;
 import es.vsanchez.clinicaveterinaria.modelo.Perro;
 import es.vsanchez.clinicaveterinaria.modelo.Roedor;
 import es.vsanchez.clinicaveterinaria.modelo.excepciones.DniInvalidoException;
@@ -187,6 +188,7 @@ public class PanelRegistroCliente extends JPanel {
 									
 					// CREA MASCOTA Y SE LA AÑADE AL CLIENTE
 					String genero;
+					Mascota mascotaCliente = null;
 					
 					if (radioButtonMacho.isSelected()) {
 						genero = "macho";
@@ -197,13 +199,13 @@ public class PanelRegistroCliente extends JPanel {
 					}
 				
 					if (radioButtonGato.isSelected()) {
-						final Gato gatoNuevo = new Gato (campoNombreMascota.getText(), ventanaPrincipalJFrame.generarCodigo(), genero, campoColor.getText());
-						clienteNuevo.addMascota(gatoNuevo);
+						mascotaCliente = new Gato (campoNombreMascota.getText(), ventanaPrincipalJFrame.generarCodigo(), genero, campoColor.getText());
+						clienteNuevo.addMascota(mascotaCliente);
 					}
 					
 					if (radioButtonPerro.isSelected()) {
-						final Perro perroNuevo = new Perro (campoNombreMascota.getText(), ventanaPrincipalJFrame.generarCodigo(), genero, campoRaza.getText());
-						clienteNuevo.addMascota(perroNuevo);
+						mascotaCliente = new Perro (campoNombreMascota.getText(), ventanaPrincipalJFrame.generarCodigo(), genero, campoRaza.getText());
+						clienteNuevo.addMascota(mascotaCliente);
 					}
 					
 					if (radioButtonRoedor.isSelected()) {
@@ -216,14 +218,15 @@ public class PanelRegistroCliente extends JPanel {
 							tipo = "ratón";
 						}					
 						
-						final Roedor roedorNuevo = new Roedor (campoNombreMascota.getText(), ventanaPrincipalJFrame.generarCodigo(), genero, tipo);
-						clienteNuevo.addMascota(roedorNuevo);
+						mascotaCliente = new Roedor (campoNombreMascota.getText(), ventanaPrincipalJFrame.generarCodigo(), genero, tipo);
+						clienteNuevo.addMascota(mascotaCliente);
 					}
 					
 					// Añadimos el cliente, utilizando excepciones
 					try {
 						try {
 							servicioClientes.addCliente(clienteNuevo);
+							servicioClientes.addMascotaAlCliente(clienteNuevo, mascotaCliente);
 							// Se reinicia el formulario para poder ser usado nuevamente
 							reiniciarFormulario(campoNombreCliente, campoDNICliente, campoDireccionCliente,campoNombreMascota, campoColor, campoRaza);
 						} catch (IOException e1) {

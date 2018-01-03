@@ -263,7 +263,6 @@ public class PanelNuevaMascota extends JPanel {
 		radioButtonPerro.addActionListener(tipoMascotaActionListener);
 		radioButtonRoedor.addActionListener(tipoMascotaActionListener);
 		
-		
 		return panelCentral;
 
 	}

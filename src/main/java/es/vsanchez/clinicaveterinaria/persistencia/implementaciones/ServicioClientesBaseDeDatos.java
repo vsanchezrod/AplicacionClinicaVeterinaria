@@ -8,6 +8,8 @@ import java.sql.Statement;
 import es.vsanchez.clinicaveterinaria.modelo.Cliente;
 import es.vsanchez.clinicaveterinaria.modelo.Gato;
 import es.vsanchez.clinicaveterinaria.modelo.Mascota;
+import es.vsanchez.clinicaveterinaria.modelo.Perro;
+import es.vsanchez.clinicaveterinaria.modelo.Roedor;
 import es.vsanchez.clinicaveterinaria.modelo.excepciones.DniInvalidoException;
 import es.vsanchez.clinicaveterinaria.persistencia.ServicioClientes;
 
@@ -51,30 +53,19 @@ public class ServicioClientesBaseDeDatos extends ServicioClientes {
 	}
 	
 	@Override
-	public void addMascotaAlCliente(Cliente cliente, Mascota mascotaNueva) throws DniInvalidoException, IOException {
+	public void addMascotaAlCliente(Cliente cliente, Mascota mascotaNueva) throws DniInvalidoException, IOException { 
 		// TODO Insert en la tabla mascota de una nueva mascota para ese cliente
 		
-		final Connection conexion = conectarConBaseDeDatos();
-						
 		final String queryInsercionMascota = crearQueryInsercionMascota(cliente, mascotaNueva);
-			
-		try {
-			final Statement statement = conexion.createStatement();
-			statement.executeUpdate(queryInsercionMascota);
-			
-			
-		} catch (SQLException e) {
-			System.out.println("No se ha podido insertar el cliente en la base de datos. Query:'" + queryInsercionMascota + "'.");
-			e.printStackTrace();
-		}
+		ejecutarQueryUpdate(queryInsercionMascota);	
 		
-		desconectarBaseDeDatos(conexion);
 	}
 	
 	@Override
 	public void addTratamientoAMascota(Mascota mascota, String fechaTratamiento, String nombreTratamiento) throws DniInvalidoException, IOException {
 
-		
+		final String queryInsercionTratamiento = crearQueryInsercionTratamiento(mascota, fechaTratamiento, nombreTratamiento);
+		ejecutarQueryUpdate(queryInsercionTratamiento);
 		
 	}
 		
@@ -110,7 +101,15 @@ public class ServicioClientesBaseDeDatos extends ServicioClientes {
 			queryInsercionMascota = crearQueryInsercionGato(cliente, gatoNuevo);
 		}
 		
-		// TODO igual para perro y roedor. Crear sus métodos
+		if (mascotaNueva instanceof Perro) {
+			final Perro perroNuevo = (Perro)mascotaNueva;
+			queryInsercionMascota = crearQueryInsercionPerro(cliente, perroNuevo);
+		}
+		
+		if (mascotaNueva instanceof Roedor) {
+			final Roedor roedorNuevo = (Roedor)mascotaNueva;
+			queryInsercionMascota = crearQueryInsercionRoedor(cliente, roedorNuevo);
+		}
 		
 		return queryInsercionMascota;
 	}
@@ -130,6 +129,47 @@ public class ServicioClientesBaseDeDatos extends ServicioClientes {
 		return queryInsercionMascota.toString();
 	}
 	
+	private String crearQueryInsercionPerro(Cliente cliente, Perro perroNuevo) {
+		
+		final StringBuilder queryInsercionMascota = new StringBuilder();
+		
+		queryInsercionMascota.append("INSERT INTO mascotas (nombre, tipo, codigo, genero, cliente, raza) VALUES (")
+		.append("'").append(perroNuevo.getNombre()).append("',")
+		.append("'").append("perro").append("',")
+		.append("'").append(perroNuevo.getCodigo()).append("',")
+		.append("'").append(perroNuevo.getGenero()).append("',")
+		.append("'").append(cliente.getDni()).append("',")
+		.append("'").append(perroNuevo.getRaza()).append("')");
+		
+		return queryInsercionMascota.toString();
+	}
+	
+	private String crearQueryInsercionRoedor(Cliente cliente, Roedor roedorNuevo) {
+		
+		final StringBuilder queryInsercionMascota = new StringBuilder();
+		
+		queryInsercionMascota.append("INSERT INTO mascotas (nombre, tipo, codigo, genero, cliente, tiporoedor) VALUES (")
+		.append("'").append(roedorNuevo.getNombre()).append("',")
+		.append("'").append("roedor").append("',")
+		.append("'").append(roedorNuevo.getCodigo()).append("',")
+		.append("'").append(roedorNuevo.getGenero()).append("',")
+		.append("'").append(cliente.getDni()).append("',")
+		.append("'").append(roedorNuevo.getTipo()).append("')");
+		
+		return queryInsercionMascota.toString();
+	}
+	
+	private String crearQueryInsercionTratamiento(Mascota mascota, String fecha, String tratamiento) {
+		
+		final StringBuilder queryInsercionTratamiento = new StringBuilder();
+		
+		queryInsercionTratamiento.append("INSERT INTO tratamientos VALUES (")
+		.append("'").append(tratamiento).append("',")
+		.append("'").append(fecha).append("',")
+		.append("'").append(mascota.getCodigo()).append("')");
+				
+		return queryInsercionTratamiento.toString();
+	}
 	
 	private void desconectarBaseDeDatos(Connection conexion) {
 		
