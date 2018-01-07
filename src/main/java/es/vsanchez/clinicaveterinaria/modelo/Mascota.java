@@ -64,7 +64,7 @@ public class Mascota implements Serializable {
 	
 	// Método que añade tratamientos al HashMap
 	public void addTratamiento(String fecha, String tratamiento) {
-		System.out.println("Tratamiento añadido");
+		System.out.println("Tratamiento '" + tratamiento + "' añadido con fecha '" + fecha + "' a la mascota " + getNombre() + ".");
 		mapTratamiento.put(fecha, tratamiento);
 	}
 	

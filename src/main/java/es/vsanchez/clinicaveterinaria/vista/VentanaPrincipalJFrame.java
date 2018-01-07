@@ -8,7 +8,6 @@ import javax.swing.JPanel;
 
 import es.vsanchez.clinicaveterinaria.persistencia.ServicioClientes;
 import es.vsanchez.clinicaveterinaria.persistencia.implementaciones.ServicioClientesBaseDeDatos;
-import es.vsanchez.clinicaveterinaria.persistencia.implementaciones.ServicioClientesFichero;
 import es.vsanchez.clinicaveterinaria.vista.paneles.PanelBienvenida;
 
 public class VentanaPrincipalJFrame extends JFrame {

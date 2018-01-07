@@ -190,13 +190,12 @@ public class PanelTratamiento extends JPanel {
 					System.out.println("Tratamiento añadido a " + mascotaBuscada.getNombre() + " a fecha de: " + campoFecha.getText() 
 							+ " corresponde con un tratamiento de: " + campoTratamiento.getText() + ". Descripción del tratamiento: " 
 							+ textAreaTratamiento.getText());
-					
-					resetearCamposTratamiento(campoFecha, campoTratamiento, textAreaTratamiento);
-					
+										
 					// Método que muestra todos los tratamientos de la mascota seleccionada
 					mascotaBuscada.mostrarTratamientos();
 					try {
 						servicioClientes.addTratamientoAMascota(mascotaBuscada, campoFecha.getText(), campoTratamiento.getText());
+						resetearCamposTratamiento(campoFecha, campoTratamiento, textAreaTratamiento);
 					} catch (DniInvalidoException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();

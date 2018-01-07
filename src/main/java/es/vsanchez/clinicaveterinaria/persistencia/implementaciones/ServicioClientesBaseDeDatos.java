@@ -2,6 +2,7 @@ package es.vsanchez.clinicaveterinaria.persistencia.implementaciones;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -23,8 +24,97 @@ public class ServicioClientesBaseDeDatos extends ServicioClientes {
 	private static final String USUARIO = "userIlerna";
 	private static final String PASSWORD = "userIlerna";
 	
-	public ServicioClientesBaseDeDatos() {
-		conectarConBaseDeDatos();
+		
+	@Override
+	public void addCliente(Cliente cliente) throws DniInvalidoException, IOException {
+		validarDni(cliente.getDni());
+		final String queryInsercionCliente = crearQueryInsercionCliente(cliente);		
+		ejecutarQueryUpdate(queryInsercionCliente);
+	}
+	
+	@Override
+	public void addMascotaAlCliente(Cliente cliente, Mascota mascotaNueva) throws DniInvalidoException, IOException { 
+		// TODO Insert en la tabla mascota de una nueva mascota para ese cliente
+		
+		final String queryInsercionMascota = crearQueryInsercionMascota(cliente, mascotaNueva);
+		ejecutarQueryUpdate(queryInsercionMascota);	
+		
+	}
+	
+	@Override
+	public void addTratamientoAMascota(Mascota mascota, String fechaTratamiento, String nombreTratamiento) throws DniInvalidoException, IOException {
+
+		final String queryInsercionTratamiento = crearQueryInsercionTratamiento(mascota, fechaTratamiento, nombreTratamiento);
+		ejecutarQueryUpdate(queryInsercionTratamiento);
+	}
+	
+	@Override
+	public Cliente buscarClientePorDNI(String dni) {
+		Cliente cliente = null;
+		
+		final String querySeleccionCliente = "SELECT * FROM clientes WHERE dni = '" + dni + "'";
+		final String querySeleccionMascotasDelCliente = "SELECT * FROM mascotas WHERE cliente = '" + dni + "'";
+		final Connection conexion = conectarConBaseDeDatos();
+		
+		try {
+			final Statement statement = conexion.createStatement();
+			final ResultSet resultadoClientes = statement.executeQuery(querySeleccionCliente);
+			
+			while (resultadoClientes.next()) {
+				cliente = new Cliente (resultadoClientes.getString("nombre"), resultadoClientes.getString("dni"));
+			}
+			
+			final Statement statementMascotas = conexion.createStatement();
+			final ResultSet resultadoMascotas = statementMascotas.executeQuery(querySeleccionMascotasDelCliente);
+			while (resultadoMascotas.next()) {
+				
+				Mascota mascota = null;
+				
+				final String tipoMascota = resultadoMascotas.getString("tipo");
+				final String nombreMascota = resultadoMascotas.getString("nombre");
+				final String codigoMascota = resultadoMascotas.getString("codigo");
+				final String generoMascota = resultadoMascotas.getString("genero");
+				
+				if("gato".equals(tipoMascota)) {
+					mascota = new Gato (nombreMascota, codigoMascota, generoMascota, resultadoMascotas.getString("color"));
+					cliente.getMascotas().add(mascota);
+				}
+				
+				if("perro".equals(tipoMascota)) {
+					mascota = new Perro (nombreMascota, codigoMascota, generoMascota, resultadoMascotas.getString("raza"));
+					cliente.getMascotas().add(mascota);
+				}
+				
+				if("roedor".equals(tipoMascota)) {
+					mascota = new Roedor (nombreMascota, codigoMascota, generoMascota, resultadoMascotas.getString("tiporoedor"));
+					cliente.getMascotas().add(mascota);
+				}
+				
+				if(mascota != null) {
+					final String querySeleccionTratamientossDeMascota = "SELECT * FROM tratamientos WHERE mascota = '" + codigoMascota + "'";
+					final Statement statementTratamientos = conexion.createStatement();
+					final ResultSet resultadoTratamientos = statementTratamientos.executeQuery(querySeleccionTratamientossDeMascota);
+					while(resultadoTratamientos.next()) {
+						mascota.addTratamiento(resultadoTratamientos.getString("fecha"), resultadoTratamientos.getString("tratamiento"));
+					}
+				}
+				
+			}
+						
+		} catch (SQLException e) {
+			System.out.println("Error con la base de datos.");
+			e.printStackTrace();
+		}
+				
+		desconectarBaseDeDatos(conexion);
+		
+		return cliente;
+	}
+	
+	@Override
+	public boolean comprobarSiExisteClientePorDNI(String dni) {
+	
+		return buscarClientePorDNI(dni) != null;
 	}
 	
 	private void ejecutarQueryUpdate(String query) {
@@ -44,31 +134,7 @@ public class ServicioClientesBaseDeDatos extends ServicioClientes {
 		desconectarBaseDeDatos(conexion);
 		
 	}
-		
-	@Override
-	public void addCliente(Cliente cliente) throws DniInvalidoException, IOException {
-		
-		final String queryInsercionCliente = crearQueryInsercionCliente(cliente);		
-		ejecutarQueryUpdate(queryInsercionCliente);
-	}
 	
-	@Override
-	public void addMascotaAlCliente(Cliente cliente, Mascota mascotaNueva) throws DniInvalidoException, IOException { 
-		// TODO Insert en la tabla mascota de una nueva mascota para ese cliente
-		
-		final String queryInsercionMascota = crearQueryInsercionMascota(cliente, mascotaNueva);
-		ejecutarQueryUpdate(queryInsercionMascota);	
-		
-	}
-	
-	@Override
-	public void addTratamientoAMascota(Mascota mascota, String fechaTratamiento, String nombreTratamiento) throws DniInvalidoException, IOException {
-
-		final String queryInsercionTratamiento = crearQueryInsercionTratamiento(mascota, fechaTratamiento, nombreTratamiento);
-		ejecutarQueryUpdate(queryInsercionTratamiento);
-		
-	}
-		
 	private Connection conectarConBaseDeDatos() {
 		
 		Connection conexion = null;
@@ -183,8 +249,6 @@ public class ServicioClientesBaseDeDatos extends ServicioClientes {
 		}
 	}
 
-	
-	
 }
 
 
