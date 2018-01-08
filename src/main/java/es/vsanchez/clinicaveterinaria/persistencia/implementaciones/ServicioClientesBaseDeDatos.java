@@ -24,7 +24,7 @@ public class ServicioClientesBaseDeDatos extends ServicioClientes {
 	private static final String USUARIO = "userIlerna";
 	private static final String PASSWORD = "userIlerna";
 	
-		
+	// Método inserta cliente (tabla clientes)
 	@Override
 	public void addCliente(Cliente cliente) throws DniInvalidoException, IOException {
 		validarDni(cliente.getDni());
@@ -32,6 +32,7 @@ public class ServicioClientesBaseDeDatos extends ServicioClientes {
 		ejecutarQueryUpdate(queryInsercionCliente);
 	}
 	
+	// Método inserta mascota (tabla mascotas)
 	@Override
 	public void addMascotaAlCliente(Cliente cliente, Mascota mascotaNueva) throws DniInvalidoException, IOException { 
 		// TODO Insert en la tabla mascota de una nueva mascota para ese cliente
@@ -41,6 +42,7 @@ public class ServicioClientesBaseDeDatos extends ServicioClientes {
 		
 	}
 	
+	// Método inserta tratamiento (tabla tratamientos)
 	@Override
 	public void addTratamientoAMascota(Mascota mascota, String fechaTratamiento, String nombreTratamiento) throws DniInvalidoException, IOException {
 
@@ -135,6 +137,7 @@ public class ServicioClientesBaseDeDatos extends ServicioClientes {
 		
 	}
 	
+	// Método que conecta con la base de datos
 	private Connection conectarConBaseDeDatos() {
 		
 		Connection conexion = null;
@@ -154,10 +157,13 @@ public class ServicioClientesBaseDeDatos extends ServicioClientes {
 		
 	}
 	
+	// Método crea la query de inserción de un cliente
 	private String crearQueryInsercionCliente(Cliente cliente) {
 		return "INSERT INTO clientes VALUES ('" + cliente.getNombre() + "', '" + cliente.getDni() + "')";
 	}
 	
+	
+	// Método crea la query de inserción de una mascota
 	private String crearQueryInsercionMascota(Cliente cliente, Mascota mascotaNueva) {
 		
 		String queryInsercionMascota = null;
@@ -180,6 +186,7 @@ public class ServicioClientesBaseDeDatos extends ServicioClientes {
 		return queryInsercionMascota;
 	}
 	
+	// Método crea la query de inserción de un gato
 	private String crearQueryInsercionGato(Cliente cliente, Gato gatoNuevo) {
 		
 		final StringBuilder queryInsercionMascota = new StringBuilder();
@@ -195,6 +202,7 @@ public class ServicioClientesBaseDeDatos extends ServicioClientes {
 		return queryInsercionMascota.toString();
 	}
 	
+	// Método crea la query de inserción de un perro
 	private String crearQueryInsercionPerro(Cliente cliente, Perro perroNuevo) {
 		
 		final StringBuilder queryInsercionMascota = new StringBuilder();
@@ -210,6 +218,7 @@ public class ServicioClientesBaseDeDatos extends ServicioClientes {
 		return queryInsercionMascota.toString();
 	}
 	
+	// Método crea la query de inserción de un roedor
 	private String crearQueryInsercionRoedor(Cliente cliente, Roedor roedorNuevo) {
 		
 		final StringBuilder queryInsercionMascota = new StringBuilder();
@@ -224,7 +233,8 @@ public class ServicioClientesBaseDeDatos extends ServicioClientes {
 		
 		return queryInsercionMascota.toString();
 	}
-	
+		
+	// Método crea la query de inserción de un tratamiento
 	private String crearQueryInsercionTratamiento(Mascota mascota, String fecha, String tratamiento) {
 		
 		final StringBuilder queryInsercionTratamiento = new StringBuilder();
@@ -237,6 +247,8 @@ public class ServicioClientesBaseDeDatos extends ServicioClientes {
 		return queryInsercionTratamiento.toString();
 	}
 	
+	
+	// Método desconecta la base de datos
 	private void desconectarBaseDeDatos(Connection conexion) {
 		
 		try {
